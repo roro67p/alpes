@@ -7,41 +7,54 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0d0f12;--bg2:#151820;--bg3:#1c2028;--bg4:#242830;
-  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
-  --amber:#c9973a;--amber2:#e8b45a;--amber-bg:rgba(201,151,58,0.13);
-  --text:#e8e4dc;--text2:#9a9288;--text3:#5a5450;
+  --bg:#0d0f12;--bg2:#13161c;--bg3:#1a1e27;--bg4:#222630;--bg5:#2a2f3a;
+  --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.12);
+  --amber:#c9973a;--amber2:#e8b45a;--amber-bg:rgba(201,151,58,0.15);
+  --text:#eae6de;--text2:#8a8278;--text3:#4a4642;
   --green:#4a9a5a;--green-bg:rgba(74,154,90,0.13);
   --red:#c04040;--red-bg:rgba(192,64,64,0.13);
   --blue:#4a7ab0;--blue-bg:rgba(74,122,176,0.13);
+  --sidebar:220px;
 }
-body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;font-size:14px}
-/* HEADER */
-.hdr{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:50px;position:sticky;top:0;z-index:100}
-.logo{color:var(--amber);font-size:16px;font-weight:700;cursor:pointer}
-.logo small{color:var(--text2);font-size:11px;font-weight:400;margin-left:8px}
-.nav{display:flex;gap:2px}
-.nb{background:transparent;border:none;color:var(--text2);padding:6px 11px;border-radius:6px;cursor:pointer;font-size:12px;transition:.15s}
-.nb:hover{background:var(--bg3);color:var(--text)}
-.nb.on{background:var(--amber-bg);color:var(--amber)}
-/* MAIN */
-.main{padding:18px 20px;max-width:1100px;margin:0 auto}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;font-size:14px;display:flex}
+.sidebar{width:var(--sidebar);min-height:100vh;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;left:0;top:0;bottom:0;z-index:100}
+.sidebar-logo{padding:20px 18px 16px;border-bottom:1px solid var(--border)}
+.logo-main{color:var(--amber);font-size:19px;font-weight:800;letter-spacing:.5px}
+.logo-sub{color:var(--text3);font-size:11px;margin-top:3px}
+.sidebar-nav{padding:10px 8px;flex:1;display:flex;flex-direction:column;gap:2px}
+.nav-item{display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:9px;cursor:pointer;transition:.15s;color:var(--text2);border:1px solid transparent}
+.nav-item:hover{background:var(--bg3);color:var(--text);border-color:var(--border)}
+.nav-item.on{background:var(--amber-bg);color:var(--amber);border-color:rgba(201,151,58,.25)}
+.nav-icon{font-size:16px;width:20px;text-align:center;flex-shrink:0}
+.nav-label{font-size:13px;font-weight:500}
+.nav-badge{margin-left:auto;background:var(--amber);color:#0d0f12;font-size:10px;font-weight:700;padding:2px 6px;border-radius:10px}
+.sidebar-section{padding:5px 8px 2px 20px;font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.9px;margin-top:4px}
+.sidebar-bottom{padding:12px 8px;border-top:1px solid var(--border)}
+.sidebar-res{display:flex;align-items:center;gap:9px;padding:9px 11px;background:var(--bg3);border-radius:9px;border:1px solid var(--border2)}
+.res-icon{width:32px;height:32px;background:var(--amber-bg);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.res-name{font-size:13px;font-weight:600;color:var(--text)}
+.res-loc{font-size:11px;color:var(--text2)}
+.main-wrap{margin-left:var(--sidebar);flex:1;min-height:100vh;display:flex;flex-direction:column}
+.topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 22px;height:50px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.page-title{font-size:15px;font-weight:700;color:var(--text)}
+.topbar-right{display:flex;align-items:center;gap:8px}
+.date-chip{font-size:11px;color:var(--text2);background:var(--bg3);padding:4px 10px;border-radius:20px;border:1px solid var(--border2)}
+.main{padding:18px 22px}
 .pg{display:none}.pg.on{display:block}
-/* CARD */
-.card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:15px;margin-bottom:13px}
-.ct{font-size:11px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:13px;padding-bottom:8px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
-/* KPIS */
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
-.kpi{background:var(--bg2);border:1px solid var(--border);border-left:2px solid var(--amber);border-radius:10px;padding:13px 15px}
-.kl{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:11px;padding:15px;margin-bottom:13px}
+.ct{font-size:11px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:13px;padding-bottom:7px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:15px}
+.kpi{background:var(--bg2);border:1px solid var(--border);border-radius:11px;padding:14px 15px;position:relative;overflow:hidden;cursor:pointer;transition:.15s}
+.kpi:hover{border-color:var(--border2)}
+.kpi::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--amber);border-radius:3px 0 0 3px}
+.kpi-icon{font-size:20px;margin-bottom:7px}
+.kl{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:3px}
 .kv{font-size:21px;font-weight:700}
 .ks{font-size:11px;color:var(--text2);margin-top:2px}
-/* GRIDS */
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
-/* APTS */
-.ag{display:grid;grid-template-columns:repeat(auto-fill,minmax(95px,1fr));gap:8px}
-.ap{border-radius:8px;padding:11px 7px;text-align:center;cursor:pointer;transition:.15s;border:1px solid transparent}
-.ap:hover{transform:translateY(-1px);filter:brightness(1.1)}
+.ag{display:grid;grid-template-columns:repeat(auto-fill,minmax(95px,1fr));gap:7px}
+.ap{border-radius:9px;padding:12px 7px;text-align:center;cursor:pointer;transition:.15s;border:1px solid transparent;position:relative}
+.ap:hover{transform:translateY(-2px);filter:brightness(1.12)}
 .ap.libre{background:var(--green-bg);border-color:rgba(74,154,90,.3)}
 .ap.occupe{background:var(--red-bg);border-color:rgba(192,64,64,.3)}
 .ap.nettoyer{background:var(--amber-bg);border-color:rgba(201,151,58,.3)}
@@ -49,375 +62,316 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
 .an{font-size:14px;font-weight:700;color:var(--text)}
 .aname{font-size:9px;color:var(--text3);margin:2px 0}
 .as{font-size:10px;font-weight:600}
-.ap.libre .as{color:var(--green)}
-.ap.occupe .as{color:var(--red)}
-.ap.nettoyer .as{color:var(--amber)}
-.ap.pret .as{color:var(--blue)}
-/* LISTE RESA */
-.rl{display:flex;flex-direction:column;gap:6px}
-.ri{display:flex;align-items:center;gap:9px;padding:9px 11px;background:var(--bg3);border-radius:8px;border-left:2px solid var(--amber)}
-.ra{font-size:12px;font-weight:600;color:var(--amber);min-width:100px}
+.ap.libre .as{color:var(--green)}.ap.occupe .as{color:var(--red)}.ap.nettoyer .as{color:var(--amber)}.ap.pret .as{color:var(--blue)}
+.ap-edit{position:absolute;top:4px;right:4px;background:var(--bg4);border:none;color:var(--text3);font-size:10px;border-radius:4px;padding:2px 4px;cursor:pointer;opacity:0;transition:.15s}
+.ap:hover .ap-edit{opacity:1}
+.rl{display:flex;flex-direction:column;gap:5px}
+.ri{display:flex;align-items:center;gap:9px;padding:9px 12px;background:var(--bg3);border-radius:9px;border-left:2px solid var(--amber);cursor:pointer;transition:.15s}
+.ri:hover{background:var(--bg4);border-left-color:var(--amber2)}
+.ra{font-size:12px;font-weight:600;color:var(--amber);min-width:95px}
 .rc{font-size:13px;color:var(--text);flex:1}
 .rd{font-size:11px;color:var(--text2)}
-/* BADGES */
+.ri-actions{display:flex;gap:5px;opacity:0;transition:.15s}
+.ri:hover .ri-actions{opacity:1}
 .badge{font-size:10px;padding:3px 8px;border-radius:10px;font-weight:600;white-space:nowrap}
 .bg{background:var(--green-bg);color:var(--green);border:1px solid rgba(74,154,90,.25)}
 .ba{background:var(--amber-bg);color:var(--amber);border:1px solid rgba(201,151,58,.25)}
 .bb{background:var(--blue-bg);color:var(--blue);border:1px solid rgba(74,122,176,.25)}
 .br{background:var(--red-bg);color:var(--red);border:1px solid rgba(192,64,64,.25)}
-/* PETITS DEJ */
-.pdj{display:flex;flex-direction:column;gap:6px}
-.pi{display:grid;grid-template-columns:95px 1fr 36px;align-items:center;gap:9px;padding:9px 11px;background:var(--bg3);border-radius:8px}
+.pi{display:grid;grid-template-columns:100px 1fr 36px;align-items:center;gap:9px;padding:9px 12px;background:var(--bg3);border-radius:9px;margin-bottom:5px;cursor:pointer;transition:.15s}
+.pi:hover{background:var(--bg4)}
 .pa{font-size:12px;font-weight:600;color:var(--amber)}
 .ptags{display:flex;gap:5px;flex-wrap:wrap}
 .ptag{font-size:10px;padding:2px 7px;border-radius:8px;background:var(--bg4);border:1px solid var(--border2);color:var(--text2)}
-.pc{font-size:18px;font-weight:700;text-align:right;color:var(--text)}
-/* COMPTA */
-.cr{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px}
+.pc{font-size:17px;font-weight:700;text-align:right;color:var(--text)}
+.cr{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-bottom:1px solid var(--border);font-size:13px;cursor:pointer;border-radius:6px;transition:.15s;gap:8px}
+.cr:hover{background:var(--bg3)}
 .cr:last-child{border-bottom:none}
-.cl{color:var(--text2)}
-.cp{color:var(--green);font-weight:600}
-.cm{color:var(--red);font-weight:600}
-/* CALENDRIER */
-.cal-grid{display:grid;grid-template-columns:80px repeat(31,1fr);gap:1px;font-size:10px;overflow-x:auto}
-.cal-head{background:var(--bg3);padding:5px 3px;text-align:center;color:var(--text2);border-radius:3px;font-weight:600}
-.cal-apt-lbl{background:var(--bg3);padding:5px 6px;color:var(--amber);font-weight:600;border-radius:3px;font-size:10px}
-.cal-cell{height:26px;border-radius:2px;background:var(--bg3)}
-.cal-cell.occ{background:rgba(192,64,64,.5)}
-.cal-cell.arr{background:rgba(74,154,90,.7)}
-.cal-cell.dep{background:rgba(74,122,176,.7)}
-/* FORMS */
+.cl{color:var(--text2);flex:1}
+.cp{color:var(--green);font-weight:600}.cm{color:var(--red);font-weight:600}
+.cr-actions{display:flex;gap:5px;opacity:0;transition:.15s}
+.cr:hover .cr-actions{opacity:1}
+.cal-grid{display:grid;gap:1px;font-size:10px}
+.cal-head{background:var(--bg3);padding:4px 2px;text-align:center;color:var(--text2);border-radius:2px;font-weight:600}
+.cal-apt-lbl{background:var(--bg3);padding:4px 7px;color:var(--amber);font-weight:600;border-radius:2px;font-size:10px;white-space:nowrap}
+.cal-cell{height:24px;border-radius:2px;background:var(--bg3)}
+.cal-cell.occ{background:rgba(192,64,64,.5)}.cal-cell.arr{background:rgba(74,154,90,.7)}.cal-cell.dep{background:rgba(74,122,176,.7)}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
 .form-row.full{grid-template-columns:1fr}
 label{font-size:11px;color:var(--text2);margin-bottom:4px;display:block}
-input,select,textarea{width:100%;background:var(--bg3);border:1px solid var(--border2);color:var(--text);padding:8px 10px;border-radius:7px;font-size:13px;outline:none;transition:.15s}
+input,select,textarea{width:100%;background:var(--bg3);border:1px solid var(--border2);color:var(--text);padding:8px 10px;border-radius:8px;font-size:13px;outline:none;transition:.15s}
 input:focus,select:focus,textarea:focus{border-color:var(--amber);background:var(--bg4)}
 select option{background:var(--bg2)}
-/* BTNS */
-.btn{padding:8px 16px;border-radius:7px;border:none;cursor:pointer;font-size:13px;font-weight:600;transition:.15s}
-.btn-primary{background:var(--amber);color:#0d0f12}
-.btn-primary:hover{background:var(--amber2)}
-.btn-ghost{background:transparent;color:var(--text2);border:1px solid var(--border2)}
-.btn-ghost:hover{background:var(--bg3);color:var(--text)}
-.btn-danger{background:var(--red-bg);color:var(--red);border:1px solid rgba(192,64,64,.25)}
-.btn-danger:hover{background:rgba(192,64,64,.25)}
-.btn-sm{padding:5px 10px;font-size:11px}
-/* MODAL */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;align-items:center;justify-content:center}
+.btn{padding:7px 14px;border-radius:8px;border:none;cursor:pointer;font-size:13px;font-weight:600;transition:.15s}
+.btn-primary{background:var(--amber);color:#0d0f12}.btn-primary:hover{background:var(--amber2)}
+.btn-ghost{background:transparent;color:var(--text2);border:1px solid var(--border2)}.btn-ghost:hover{background:var(--bg3);color:var(--text)}
+.btn-danger{background:var(--red-bg);color:var(--red);border:1px solid rgba(192,64,64,.2)}.btn-danger:hover{background:rgba(192,64,64,.3)}
+.btn-sm{padding:4px 9px;font-size:11px}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:200;align-items:center;justify-content:center}
 .modal-overlay.on{display:flex}
-.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:22px;width:480px;max-width:95vw;max-height:90vh;overflow-y:auto}
+.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:13px;padding:22px;width:500px;max-width:96vw;max-height:92vh;overflow-y:auto}
 .modal-title{font-size:15px;font-weight:700;color:var(--text);margin-bottom:16px;display:flex;justify-content:space-between;align-items:center}
 .close-btn{background:transparent;border:none;color:var(--text2);font-size:18px;cursor:pointer;padding:2px 6px;border-radius:4px}
 .close-btn:hover{background:var(--bg3);color:var(--text)}
-/* ALERTS */
-.alert-bar{background:var(--amber-bg);border:1px solid rgba(201,151,58,.3);border-radius:8px;padding:9px 14px;margin-bottom:13px;font-size:12px;color:var(--amber);display:flex;align-items:center;gap:8px}
-/* LEGEND */
-.leg{display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.alert-bar{background:var(--amber-bg);border:1px solid rgba(201,151,58,.3);border-radius:9px;padding:9px 13px;margin-bottom:12px;font-size:12px;color:var(--amber);display:flex;align-items:center;gap:8px}
+.leg{display:flex;gap:11px;margin-bottom:11px;flex-wrap:wrap}
 .li{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--text3)}
 .ld{width:8px;height:8px;border-radius:50%}
-/* TABS */
-.tabs{display:flex;gap:4px;margin-bottom:14px}
-.tab{padding:6px 14px;border-radius:6px;border:1px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;font-size:12px;transition:.15s}
+.tabs{display:flex;gap:4px;margin-bottom:13px}
+.tab{padding:6px 14px;border-radius:7px;border:1px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;font-size:12px;font-weight:500;transition:.15s}
 .tab.on{background:var(--amber-bg);color:var(--amber);border-color:rgba(201,151,58,.3)}
-/* TABLE */
 table{width:100%;border-collapse:collapse}
-th{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;padding:7px 10px;border-bottom:1px solid var(--border);text-align:left}
-td{padding:9px 10px;border-bottom:1px solid var(--border);font-size:13px;color:var(--text2)}
+th{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;padding:7px 9px;border-bottom:1px solid var(--border);text-align:left}
+td{padding:8px 9px;border-bottom:1px solid var(--border);font-size:13px;color:var(--text2)}
 tr:last-child td{border-bottom:none}
 tr:hover td{background:var(--bg3);color:var(--text)}
-/* STAT BARS */
-.sbar{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-.sbar-lbl{font-size:12px;color:var(--text2);min-width:90px}
+.td-actions{opacity:0;transition:.15s}
+tr:hover .td-actions{opacity:1}
+.sbar{display:flex;align-items:center;gap:9px;margin-bottom:7px}
+.sbar-lbl{font-size:12px;color:var(--text2);min-width:88px}
 .sbar-track{flex:1;background:var(--bg3);border-radius:4px;height:6px;overflow:hidden}
 .sbar-fill{height:100%;background:var(--amber);border-radius:4px;transition:.4s}
-.sbar-val{font-size:12px;color:var(--text);min-width:35px;text-align:right}
-/* SCROLL */
-::-webkit-scrollbar{width:5px;height:5px}
+.sbar-val{font-size:12px;color:var(--text);min-width:42px;text-align:right}
+.edit-hint{font-size:10px;color:var(--text3);margin-bottom:10px;display:flex;align-items:center;gap:5px}
+::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:3px}
-@media(max-width:700px){
-  .kpis{grid-template-columns:1fr 1fr}
-  .g2{grid-template-columns:1fr}
-  .nav .nb{padding:6px 7px;font-size:11px}
-  .main{padding:12px}
-}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<div class="hdr">
-  <div class="logo" onclick="showPage('dashboard')">AlpiGest <small id="res-name-display">— Résidence</small></div>
-  <div class="nav">
-    <button class="nb on" onclick="showPage('dashboard')">Tableau de bord</button>
-    <button class="nb" onclick="showPage('reservations')">Réservations</button>
-    <button class="nb" onclick="showPage('menage')">Ménage</button>
-    <button class="nb" onclick="showPage('petitdej')">Petits-déjeuners</button>
-    <button class="nb" onclick="showPage('compta')">Comptabilité</button>
-    <button class="nb" onclick="showPage('settings')">⚙ Paramètres</button>
+<div class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-main">🏔 AlpiGest</div>
+    <div class="logo-sub" id="res-loc-display">Savoie, France</div>
+  </div>
+  <div class="sidebar-nav">
+    <div class="sidebar-section">Principal</div>
+    <div class="nav-item on" onclick="showPage('dashboard',this)"><span class="nav-icon">📊</span><span class="nav-label">Tableau de bord</span></div>
+    <div class="nav-item" onclick="showPage('reservations',this)"><span class="nav-icon">📅</span><span class="nav-label">Réservations</span><span class="nav-badge" id="nb-resa">0</span></div>
+    <div class="sidebar-section">Opérations</div>
+    <div class="nav-item" onclick="showPage('menage',this)"><span class="nav-icon">🧹</span><span class="nav-label">Ménage</span><span class="nav-badge" id="nb-tasks" style="display:none"></span></div>
+    <div class="nav-item" onclick="showPage('petitdej',this)"><span class="nav-icon">☕</span><span class="nav-label">Petits-déjeuners</span></div>
+    <div class="sidebar-section">Gestion</div>
+    <div class="nav-item" onclick="showPage('compta',this)"><span class="nav-icon">💰</span><span class="nav-label">Comptabilité</span></div>
+    <div class="nav-item" onclick="showPage('settings',this)"><span class="nav-icon">⚙️</span><span class="nav-label">Paramètres</span></div>
+  </div>
+  <div class="sidebar-bottom">
+    <div class="sidebar-res">
+      <div class="res-icon">🏠</div>
+      <div>
+        <div class="res-name" id="res-name-display">Les Mélèzes</div>
+        <div class="res-loc" id="apt-count-display">8 appartements</div>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- MAIN -->
-<div class="main">
+<div class="main-wrap">
+  <div class="topbar">
+    <div class="page-title" id="topbar-title">Tableau de bord</div>
+    <div class="topbar-right">
+      <div class="date-chip" id="date-chip"></div>
+      <button class="btn btn-primary btn-sm" id="topbar-action" onclick="topbarAction()" style="display:none">+ Nouveau</button>
+    </div>
+  </div>
+  <div class="main">
 
-<!-- === DASHBOARD === -->
-<div id="pg-dashboard" class="pg on">
-  <div id="alert-zone"></div>
-  <div class="kpis" id="kpi-zone"></div>
-  <div class="g2">
-    <div class="card">
-      <div class="ct">État des appartements
-        <button class="btn btn-ghost btn-sm" onclick="showPage('menage')">Voir ménage →</button>
-      </div>
-      <div class="leg">
-        <div class="li"><div class="ld" style="background:var(--green)"></div>Libre</div>
-        <div class="li"><div class="ld" style="background:var(--red)"></div>Occupé</div>
-        <div class="li"><div class="ld" style="background:var(--amber)"></div>À nettoyer</div>
-        <div class="li"><div class="ld" style="background:var(--blue)"></div>Prêt</div>
-      </div>
-      <div class="ag" id="apt-grid-dash"></div>
-    </div>
-    <div class="card">
-      <div class="ct">Arrivées & départs aujourd\'hui</div>
-      <div class="rl" id="today-list"></div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="ct">Prochaines réservations</div>
-    <div class="rl" id="next-resa-list"></div>
-  </div>
-</div>
-
-<!-- === RÉSERVATIONS === -->
-<div id="pg-reservations" class="pg">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-    <div class="tabs">
-      <button class="tab on" onclick="setResaTab('liste',this)">Liste</button>
-      <button class="tab" onclick="setResaTab('calendrier',this)">Calendrier</button>
-    </div>
-    <button class="btn btn-primary" onclick="openModal('modal-new-resa')">+ Nouvelle réservation</button>
-  </div>
-  <div id="resa-tab-liste">
-    <div class="card">
-      <div class="ct">Toutes les réservations</div>
-      <table id="resa-table">
-        <thead><tr>
-          <th>Appartement</th><th>Client</th><th>Arrivée</th><th>Départ</th><th>Pers.</th><th>Montant</th><th>Statut</th><th></th>
-        </tr></thead>
-        <tbody id="resa-tbody"></tbody>
-      </table>
-    </div>
-  </div>
-  <div id="resa-tab-calendrier" style="display:none">
-    <div class="card">
-      <div class="ct">Calendrier — <span id="cal-month-lbl"></span>
-        <div style="display:flex;gap:6px">
-          <button class="btn btn-ghost btn-sm" onclick="calPrev()">‹</button>
-          <button class="btn btn-ghost btn-sm" onclick="calNext()">›</button>
+    <!-- DASHBOARD -->
+    <div id="pg-dashboard" class="pg on">
+      <div id="alert-zone"></div>
+      <div class="kpis" id="kpi-zone"></div>
+      <div class="g2">
+        <div class="card">
+          <div class="ct">Appartements <span style="font-size:10px;color:var(--text3);font-weight:400;text-transform:none">clic = changer statut</span></div>
+          <div class="leg"><div class="li"><div class="ld" style="background:var(--green)"></div>Libre</div><div class="li"><div class="ld" style="background:var(--red)"></div>Occupé</div><div class="li"><div class="ld" style="background:var(--amber)"></div>À nettoyer</div><div class="li"><div class="ld" style="background:var(--blue)"></div>Prêt</div></div>
+          <div class="ag" id="apt-grid-dash"></div>
+        </div>
+        <div class="card">
+          <div class="ct">Mouvements du jour</div>
+          <div class="rl" id="today-list"></div>
         </div>
       </div>
-      <div style="overflow-x:auto"><div class="cal-grid" id="cal-grid"></div></div>
-      <div class="leg" style="margin-top:10px;margin-bottom:0">
-        <div class="li"><div class="ld" style="background:rgba(192,64,64,.5)"></div>Occupé</div>
-        <div class="li"><div class="ld" style="background:rgba(74,154,90,.7)"></div>Arrivée</div>
-        <div class="li"><div class="ld" style="background:rgba(74,122,176,.7)"></div>Départ</div>
+      <div class="card">
+        <div class="ct">Prochaines arrivées</div>
+        <div class="rl" id="next-resa-list"></div>
       </div>
     </div>
-  </div>
-</div>
 
-<!-- === MÉNAGE === -->
-<div id="pg-menage" class="pg">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-    <h2 style="font-size:15px;color:var(--text)">Ménage & états des appartements</h2>
-    <button class="btn btn-primary btn-sm" onclick="openModal('modal-task')">+ Tâche</button>
-  </div>
-  <div class="card">
-    <div class="ct">État en temps réel</div>
-    <div class="ag" id="apt-grid-menage"></div>
-  </div>
-  <div class="card">
-    <div class="ct">Tâches du jour</div>
-    <div id="tasks-list" class="rl"></div>
-  </div>
-</div>
-
-<!-- === PETITS-DÉJEUNERS === -->
-<div id="pg-petitdej" class="pg">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-    <h2 style="font-size:15px;color:var(--text)">Petits-déjeuners</h2>
-    <button class="btn btn-primary btn-sm" onclick="openModal('modal-pdj')">+ Commande</button>
-  </div>
-  <div class="kpis" id="pdj-kpis"></div>
-  <div class="card">
-    <div class="ct">Commandes — <span id="pdj-date-lbl"></span></div>
-    <div class="pdj" id="pdj-list"></div>
-  </div>
-</div>
-
-<!-- === COMPTABILITÉ === -->
-<div id="pg-compta" class="pg">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-    <h2 style="font-size:15px;color:var(--text)">Comptabilité</h2>
-    <button class="btn btn-primary btn-sm" onclick="openModal('modal-mvt')">+ Mouvement</button>
-  </div>
-  <div class="kpis" id="compta-kpis"></div>
-  <div class="g2">
-    <div class="card">
-      <div class="ct">Mouvements récents</div>
-      <div id="mvt-list"></div>
+    <!-- RÉSERVATIONS -->
+    <div id="pg-reservations" class="pg">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:13px">
+        <div class="tabs">
+          <button class="tab on" onclick="setResaTab('liste',this)">Liste</button>
+          <button class="tab" onclick="setResaTab('calendrier',this)">Calendrier</button>
+        </div>
+        <button class="btn btn-primary" onclick="openResaModal(null)">+ Réservation</button>
+      </div>
+      <div id="resa-tab-liste">
+        <div class="edit-hint">✏️ Cliquez sur une ligne pour modifier</div>
+        <div class="card"><div class="ct">Toutes les réservations</div>
+          <table><thead><tr><th>Appt.</th><th>Client</th><th>Arrivée</th><th>Départ</th><th>Pers.</th><th>Montant</th><th>Statut</th><th>Notes</th><th></th></tr></thead>
+          <tbody id="resa-tbody"></tbody></table>
+        </div>
+      </div>
+      <div id="resa-tab-calendrier" style="display:none">
+        <div class="card">
+          <div class="ct">Calendrier — <span id="cal-month-lbl"></span>
+            <div style="display:flex;gap:5px"><button class="btn btn-ghost btn-sm" onclick="calPrev()">‹</button><button class="btn btn-ghost btn-sm" onclick="calNext()">›</button></div>
+          </div>
+          <div style="overflow-x:auto"><div class="cal-grid" id="cal-grid"></div></div>
+          <div class="leg" style="margin-top:9px;margin-bottom:0"><div class="li"><div class="ld" style="background:rgba(192,64,64,.5)"></div>Occupé</div><div class="li"><div class="ld" style="background:rgba(74,154,90,.7)"></div>Arrivée</div><div class="li"><div class="ld" style="background:rgba(74,122,176,.7)"></div>Départ</div></div>
+        </div>
+      </div>
     </div>
-    <div class="card">
-      <div class="ct">Revenus par appartement</div>
-      <div id="rev-by-apt"></div>
+
+    <!-- MÉNAGE -->
+    <div id="pg-menage" class="pg">
+      <div class="card">
+        <div class="ct">État appartements <span style="font-size:10px;color:var(--text3);font-weight:400;text-transform:none">clic = changer statut · ✎ = éditer</span>
+          <button class="btn btn-primary btn-sm" onclick="openTaskModal(null)">+ Tâche</button>
+        </div>
+        <div class="ag" id="apt-grid-menage"></div>
+      </div>
+      <div class="card">
+        <div class="ct">Tâches <div style="display:flex;gap:5px"><button class="btn btn-ghost btn-sm" onclick="clearDoneTasks()">Effacer terminées</button></div></div>
+        <div id="tasks-list" class="rl"></div>
+      </div>
     </div>
+
+    <!-- PETITS-DÉJEUNERS -->
+    <div id="pg-petitdej" class="pg">
+      <div class="kpis" id="pdj-kpis"></div>
+      <div class="card">
+        <div class="ct">Commandes — <span id="pdj-date-lbl"></span>
+          <button class="btn btn-primary btn-sm" onclick="openPdjModal(null)">+ Commande</button>
+        </div>
+        <div class="edit-hint">✏️ Cliquez sur une commande pour modifier</div>
+        <div id="pdj-list"></div>
+      </div>
+    </div>
+
+    <!-- COMPTABILITÉ -->
+    <div id="pg-compta" class="pg">
+      <div class="kpis" id="compta-kpis"></div>
+      <div class="g2">
+        <div class="card">
+          <div class="ct">Mouvements <button class="btn btn-primary btn-sm" onclick="openMvtModal(null)">+ Mouvement</button></div>
+          <div class="edit-hint">✏️ Cliquez pour modifier</div>
+          <div id="mvt-list"></div>
+        </div>
+        <div class="card">
+          <div class="ct">Revenus par appartement</div>
+          <div id="rev-by-apt"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PARAMÈTRES -->
+    <div id="pg-settings" class="pg">
+      <div class="g2">
+        <div class="card">
+          <div class="ct">Résidence</div>
+          <div class="form-row full"><label>Nom</label><input id="set-nom" type="text"></div>
+          <div class="form-row full"><label>Localisation</label><input id="set-loc" type="text"></div>
+          <button class="btn btn-primary" style="margin-top:8px" onclick="saveSettings()">Enregistrer</button>
+        </div>
+        <div class="card">
+          <div class="ct">Appartements <button class="btn btn-primary btn-sm" onclick="openAptModal(null)">+ Ajouter</button></div>
+          <div class="edit-hint">✏️ Cliquez pour modifier</div>
+          <div id="apt-settings-list" class="rl"></div>
+        </div>
+      </div>
+      <div class="card" style="border-color:rgba(192,64,64,.2)">
+        <div class="ct" style="color:var(--red)">Zone danger</div>
+        <button class="btn btn-danger" onclick="resetAll()">🗑 Réinitialiser toutes les données</button>
+      </div>
+    </div>
+
   </div>
 </div>
 
-<!-- === PARAMÈTRES === -->
-<div id="pg-settings" class="pg">
-  <div class="g2">
-    <div class="card">
-      <div class="ct">Informations résidence</div>
-      <div class="form-row full"><label>Nom de la résidence</label><input id="set-nom" type="text" placeholder="Les Mélèzes"></div>
-      <div class="form-row full"><label>Localisation</label><input id="set-loc" type="text" placeholder="Savoie, France"></div>
-      <button class="btn btn-primary" style="margin-top:8px" onclick="saveSettings()">Enregistrer</button>
-    </div>
-    <div class="card">
-      <div class="ct">Appartements <button class="btn btn-primary btn-sm" onclick="openModal('modal-new-apt')">+ Ajouter</button></div>
-      <div id="apt-settings-list" class="rl"></div>
-    </div>
-  </div>
-</div>
-
-</div><!-- /main -->
-
-<!-- ====== MODALS ====== -->
-
-<!-- Nouvelle réservation -->
-<div class="modal-overlay" id="modal-new-resa">
+<!-- MODAL RÉSERVATION -->
+<div class="modal-overlay" id="modal-resa">
   <div class="modal">
-    <div class="modal-title">Nouvelle réservation <button class="close-btn" onclick="closeModal('modal-new-resa')">✕</button></div>
-    <div class="form-row">
-      <div><label>Appartement</label><select id="nr-apt"></select></div>
-      <div><label>Nb personnes</label><input id="nr-pers" type="number" min="1" value="2"></div>
-    </div>
+    <div class="modal-title"><span id="modal-resa-title">Nouvelle réservation</span><button class="close-btn" onclick="closeModal('modal-resa')">✕</button></div>
+    <input type="hidden" id="nr-id">
+    <div class="form-row"><div><label>Appartement</label><select id="nr-apt"></select></div><div><label>Nb personnes</label><input id="nr-pers" type="number" min="1" value="2"></div></div>
     <div class="form-row full"><label>Nom du client</label><input id="nr-client" type="text" placeholder="Famille Martin"></div>
-    <div class="form-row full"><label>Téléphone</label><input id="nr-tel" type="text" placeholder="06 12 34 56 78"></div>
-    <div class="form-row full"><label>Email</label><input id="nr-email" type="email" placeholder="client@email.fr"></div>
-    <div class="form-row">
-      <div><label>Arrivée</label><input id="nr-arr" type="date"></div>
-      <div><label>Départ</label><input id="nr-dep" type="date"></div>
-    </div>
-    <div class="form-row">
-      <div><label>Montant (€)</label><input id="nr-mnt" type="number" min="0" placeholder="0"></div>
-      <div><label>Statut</label>
-        <select id="nr-statut">
-          <option value="confirmee">Confirmée</option>
-          <option value="option">En option</option>
-          <option value="annulee">Annulée</option>
-        </select>
-      </div>
-    </div>
-    <div class="form-row full"><label>Notes</label><textarea id="nr-notes" rows="2" placeholder="Informations complémentaires..."></textarea></div>
-    <div style="display:flex;gap:8px;margin-top:12px">
-      <button class="btn btn-primary" onclick="saveResa()">Enregistrer</button>
-      <button class="btn btn-ghost" onclick="closeModal('modal-new-resa')">Annuler</button>
+    <div class="form-row"><div><label>Téléphone</label><input id="nr-tel" type="text"></div><div><label>Email</label><input id="nr-email" type="email"></div></div>
+    <div class="form-row"><div><label>Arrivée</label><input id="nr-arr" type="date"></div><div><label>Départ</label><input id="nr-dep" type="date"></div></div>
+    <div class="form-row"><div><label>Montant (€)</label><input id="nr-mnt" type="number" min="0"></div><div><label>Statut</label><select id="nr-statut"><option value="confirmee">Confirmée</option><option value="option">Option</option><option value="annulee">Annulée</option></select></div></div>
+    <div class="form-row full"><label>Notes</label><textarea id="nr-notes" rows="2"></textarea></div>
+    <div style="display:flex;gap:8px;margin-top:12px;justify-content:space-between">
+      <div style="display:flex;gap:8px"><button class="btn btn-primary" onclick="saveResa()">Enregistrer</button><button class="btn btn-ghost" onclick="closeModal('modal-resa')">Annuler</button></div>
+      <button class="btn btn-danger btn-sm" id="btn-del-resa" onclick="deleteResaFromModal()" style="display:none">Supprimer</button>
     </div>
   </div>
 </div>
 
-<!-- Nouveau mouvement comptable -->
+<!-- MODAL MOUVEMENT -->
 <div class="modal-overlay" id="modal-mvt">
   <div class="modal">
-    <div class="modal-title">Nouveau mouvement <button class="close-btn" onclick="closeModal('modal-mvt')">✕</button></div>
-    <div class="form-row full"><label>Libellé</label><input id="mvt-lib" type="text" placeholder="Encaissement client / Achat fournitures..."></div>
-    <div class="form-row">
-      <div><label>Type</label>
-        <select id="mvt-type">
-          <option value="recette">Recette (+)</option>
-          <option value="depense">Dépense (−)</option>
-        </select>
-      </div>
-      <div><label>Montant (€)</label><input id="mvt-mnt" type="number" min="0" placeholder="0"></div>
-    </div>
-    <div class="form-row">
-      <div><label>Date</label><input id="mvt-date" type="date"></div>
-      <div><label>Appartement (optionnel)</label><select id="mvt-apt"><option value="">—</option></select></div>
-    </div>
-    <div style="display:flex;gap:8px;margin-top:12px">
-      <button class="btn btn-primary" onclick="saveMvt()">Enregistrer</button>
-      <button class="btn btn-ghost" onclick="closeModal('modal-mvt')">Annuler</button>
+    <div class="modal-title"><span id="modal-mvt-title">Nouveau mouvement</span><button class="close-btn" onclick="closeModal('modal-mvt')">✕</button></div>
+    <input type="hidden" id="mvt-id">
+    <div class="form-row full"><label>Libellé</label><input id="mvt-lib" type="text"></div>
+    <div class="form-row"><div><label>Type</label><select id="mvt-type"><option value="recette">Recette (+)</option><option value="depense">Dépense (−)</option></select></div><div><label>Montant (€)</label><input id="mvt-mnt" type="number" min="0"></div></div>
+    <div class="form-row"><div><label>Date</label><input id="mvt-date" type="date"></div><div><label>Appartement</label><select id="mvt-apt"><option value="">—</option></select></div></div>
+    <div style="display:flex;gap:8px;margin-top:12px;justify-content:space-between">
+      <div style="display:flex;gap:8px"><button class="btn btn-primary" onclick="saveMvt()">Enregistrer</button><button class="btn btn-ghost" onclick="closeModal('modal-mvt')">Annuler</button></div>
+      <button class="btn btn-danger btn-sm" id="btn-del-mvt" onclick="deleteMvtFromModal()" style="display:none">Supprimer</button>
     </div>
   </div>
 </div>
 
-<!-- Commande petit-déjeuner -->
+<!-- MODAL PDJ -->
 <div class="modal-overlay" id="modal-pdj">
   <div class="modal">
-    <div class="modal-title">Commande petit-déjeuner <button class="close-btn" onclick="closeModal('modal-pdj')">✕</button></div>
-    <div class="form-row">
-      <div><label>Appartement</label><select id="pdj-apt"></select></div>
-      <div><label>Date</label><input id="pdj-date" type="date"></div>
-    </div>
-    <div class="form-row">
-      <div><label>Nb couverts buffet</label><input id="pdj-buffet" type="number" min="0" value="0"></div>
-      <div><label>Régimes spéciaux</label><input id="pdj-spec" type="text" placeholder="Sans gluten x1, végétalien x1..."></div>
-    </div>
-    <div style="display:flex;gap:8px;margin-top:12px">
-      <button class="btn btn-primary" onclick="savePdj()">Enregistrer</button>
-      <button class="btn btn-ghost" onclick="closeModal('modal-pdj')">Annuler</button>
+    <div class="modal-title"><span id="modal-pdj-title">Petit-déjeuner</span><button class="close-btn" onclick="closeModal('modal-pdj')">✕</button></div>
+    <input type="hidden" id="pdj-id">
+    <div class="form-row"><div><label>Appartement</label><select id="pdj-apt"></select></div><div><label>Date</label><input id="pdj-date" type="date"></div></div>
+    <div class="form-row"><div><label>Nb buffets</label><input id="pdj-buffet" type="number" min="0" value="0"></div><div><label>Régimes spéciaux</label><input id="pdj-spec" type="text" placeholder="Sans gluten x1..."></div></div>
+    <div style="display:flex;gap:8px;margin-top:12px;justify-content:space-between">
+      <div style="display:flex;gap:8px"><button class="btn btn-primary" onclick="savePdj()">Enregistrer</button><button class="btn btn-ghost" onclick="closeModal('modal-pdj')">Annuler</button></div>
+      <button class="btn btn-danger btn-sm" id="btn-del-pdj" onclick="deletePdjFromModal()" style="display:none">Supprimer</button>
     </div>
   </div>
 </div>
 
-<!-- Tâche ménage -->
+<!-- MODAL TÂCHE -->
 <div class="modal-overlay" id="modal-task">
   <div class="modal">
-    <div class="modal-title">Nouvelle tâche ménage <button class="close-btn" onclick="closeModal('modal-task')">✕</button></div>
-    <div class="form-row">
-      <div><label>Appartement</label><select id="task-apt"></select></div>
-      <div><label>Priorité</label>
-        <select id="task-prio">
-          <option value="haute">Haute</option>
-          <option value="normale">Normale</option>
-          <option value="basse">Basse</option>
-        </select>
-      </div>
-    </div>
-    <div class="form-row full"><label>Description</label><input id="task-desc" type="text" placeholder="Ménage complet + linge..."></div>
-    <div style="display:flex;gap:8px;margin-top:12px">
-      <button class="btn btn-primary" onclick="saveTask()">Enregistrer</button>
-      <button class="btn btn-ghost" onclick="closeModal('modal-task')">Annuler</button>
+    <div class="modal-title"><span id="modal-task-title">Tâche ménage</span><button class="close-btn" onclick="closeModal('modal-task')">✕</button></div>
+    <input type="hidden" id="task-id">
+    <div class="form-row"><div><label>Appartement</label><select id="task-apt"></select></div><div><label>Priorité</label><select id="task-prio"><option value="haute">Haute</option><option value="normale">Normale</option><option value="basse">Basse</option></select></div></div>
+    <div class="form-row full"><label>Description</label><input id="task-desc" type="text"></div>
+    <div class="form-row full"><label>Statut</label><select id="task-done"><option value="false">À faire</option><option value="true">Terminée</option></select></div>
+    <div style="display:flex;gap:8px;margin-top:12px;justify-content:space-between">
+      <div style="display:flex;gap:8px"><button class="btn btn-primary" onclick="saveTask()">Enregistrer</button><button class="btn btn-ghost" onclick="closeModal('modal-task')">Annuler</button></div>
+      <button class="btn btn-danger btn-sm" id="btn-del-task" onclick="deleteTaskFromModal()" style="display:none">Supprimer</button>
     </div>
   </div>
 </div>
 
-<!-- Nouvel appartement -->
-<div class="modal-overlay" id="modal-new-apt">
+<!-- MODAL APPARTEMENT -->
+<div class="modal-overlay" id="modal-apt">
   <div class="modal">
-    <div class="modal-title">Ajouter un appartement <button class="close-btn" onclick="closeModal('modal-new-apt')">✕</button></div>
-    <div class="form-row">
-      <div><label>Numéro / Code</label><input id="apt-num" type="text" placeholder="A9"></div>
-      <div><label>Nom</label><input id="apt-nomv" type="text" placeholder="Bellecôte"></div>
-    </div>
-    <div class="form-row">
-      <div><label>Capacité (pers.)</label><input id="apt-cap" type="number" min="1" value="4"></div>
-      <div><label>Prix / nuit (€)</label><input id="apt-prix" type="number" min="0" value="120"></div>
-    </div>
-    <div style="display:flex;gap:8px;margin-top:12px">
-      <button class="btn btn-primary" onclick="saveNewApt()">Ajouter</button>
-      <button class="btn btn-ghost" onclick="closeModal('modal-new-apt')">Annuler</button>
+    <div class="modal-title"><span id="modal-apt-title">Appartement</span><button class="close-btn" onclick="closeModal('modal-apt')">✕</button></div>
+    <input type="hidden" id="apt-orig-id">
+    <div class="form-row"><div><label>Code</label><input id="apt-num" type="text" placeholder="A9"></div><div><label>Nom</label><input id="apt-nomv" type="text" placeholder="Bellecôte"></div></div>
+    <div class="form-row"><div><label>Capacité (pers.)</label><input id="apt-cap" type="number" min="1" value="4"></div><div><label>Prix / nuit (€)</label><input id="apt-prix" type="number" min="0" value="120"></div></div>
+    <div class="form-row full"><label>Statut actuel</label><select id="apt-statut"><option value="libre">Libre</option><option value="occupe">Occupé</option><option value="nettoyer">À nettoyer</option><option value="pret">Prêt</option></select></div>
+    <div style="display:flex;gap:8px;margin-top:12px;justify-content:space-between">
+      <div style="display:flex;gap:8px"><button class="btn btn-primary" onclick="saveApt()">Enregistrer</button><button class="btn btn-ghost" onclick="closeModal('modal-apt')">Annuler</button></div>
+      <button class="btn btn-danger btn-sm" id="btn-del-apt" onclick="deleteAptFromModal()" style="display:none">Supprimer</button>
     </div>
   </div>
 </div>
 
 <script>
-// ===== DATA =====
-var S = {
-  settings: { nom: 'Les Mélèzes', loc: 'Savoie, France' },
-  apts: [
+var defaultData={
+  settings:{nom:'Les Mélèzes',loc:'Savoie, France'},
+  apts:[
     {id:'A1',nom:'Chamois',cap:4,prix:130,statut:'occupe'},
     {id:'A2',nom:'Bouquetin',cap:3,prix:110,statut:'occupe'},
     {id:'A3',nom:'Marmottes',cap:5,prix:150,statut:'nettoyer'},
@@ -427,7 +381,7 @@ var S = {
     {id:'A7',nom:'Poudreuse',cap:6,prix:180,statut:'nettoyer'},
     {id:'A8',nom:'Alpaga',cap:3,prix:120,statut:'occupe'}
   ],
-  reservations: [
+  reservations:[
     {id:1,apt:'A1',client:'M. Bernard',tel:'',email:'',pers:4,arr:'2025-04-10',dep:'2025-04-17',mnt:910,statut:'confirmee',notes:''},
     {id:2,apt:'A2',client:'Famille Petit',tel:'',email:'',pers:3,arr:'2025-04-12',dep:'2025-04-19',mnt:770,statut:'confirmee',notes:''},
     {id:3,apt:'A3',client:'Famille Dupont',tel:'',email:'',pers:5,arr:'2025-04-15',dep:'2025-04-22',mnt:1050,statut:'confirmee',notes:'Arrivée tardive'},
@@ -436,328 +390,416 @@ var S = {
     {id:6,apt:'A7',client:'Groupe Martin',tel:'',email:'',pers:6,arr:'2025-04-17',dep:'2025-04-24',mnt:1260,statut:'confirmee',notes:'Groupe entreprise'},
     {id:7,apt:'A8',client:'Mme Fontaine',tel:'',email:'',pers:3,arr:'2025-04-11',dep:'2025-04-18',mnt:840,statut:'confirmee',notes:''}
   ],
-  tasks: [
+  tasks:[
     {id:1,apt:'A3',desc:'Ménage complet + linge',prio:'haute',done:false},
     {id:2,apt:'A7',desc:'Ménage complet + linge',prio:'haute',done:false},
-    {id:3,apt:'A6',desc:'Vérification état — prêt',prio:'normale',done:true}
+    {id:3,apt:'A6',desc:'Vérification état',prio:'normale',done:true}
   ],
-  pdjs: [
+  pdjs:[
     {id:1,apt:'A1',date:'2025-04-16',buffet:2,spec:'Sans gluten x1'},
     {id:2,apt:'A2',date:'2025-04-16',buffet:3,spec:''},
     {id:3,apt:'A3',date:'2025-04-16',buffet:4,spec:'Végétalien x1'},
     {id:4,apt:'A4',date:'2025-04-16',buffet:2,spec:''},
     {id:5,apt:'A8',date:'2025-04-16',buffet:1,spec:''}
   ],
-  mouvements: [
+  mouvements:[
     {id:1,lib:'Famille Dupont — A3 (7 nuits)',type:'recette',mnt:1050,date:'2025-04-15',apt:'A3'},
     {id:2,lib:'M. Bernard — A1 (7 nuits)',type:'recette',mnt:910,date:'2025-04-10',apt:'A1'},
-    {id:3,lib:'Produits ménage — Lidl Pro',type:'depense',mnt:124,date:'2025-04-12',apt:''},
-    {id:4,lib:'Famille Petit — A2 (7 nuits)',type:'recette',mnt:770,date:'2025-04-12',apt:'A2'},
+    {id:3,lib:'Produits ménage',type:'depense',mnt:124,date:'2025-04-12',apt:''},
+    {id:4,lib:'Famille Petit — A2',type:'recette',mnt:770,date:'2025-04-12',apt:'A2'},
     {id:5,lib:'Linge et blanchisserie',type:'depense',mnt:210,date:'2025-04-13',apt:''},
-    {id:6,lib:'Mme Fontaine — A8 (7 nuits)',type:'recette',mnt:840,date:'2025-04-11',apt:'A8'},
+    {id:6,lib:'Mme Fontaine — A8',type:'recette',mnt:840,date:'2025-04-11',apt:'A8'},
     {id:7,lib:'Internet + téléphone',type:'depense',mnt:65,date:'2025-04-01',apt:''},
     {id:8,lib:'Petits-déjeuners fournisseur',type:'depense',mnt:180,date:'2025-04-14',apt:''}
   ]
 };
 
+var S=JSON.parse(JSON.stringify(defaultData));
 function load(){var d=localStorage.getItem('alpigest');if(d)try{S=JSON.parse(d)}catch(e){}}
 function save(){localStorage.setItem('alpigest',JSON.stringify(S))}
 load();
 
-// ===== NAVIGATION =====
-function showPage(id){
+var currentPage='dashboard';
+var pagesMeta={dashboard:{title:'Tableau de bord'},reservations:{title:'Réservations',action:'+ Réservation'},menage:{title:'Ménage',action:'+ Tâche'},petitdej:{title:'Petits-déjeuners',action:'+ Commande'},compta:{title:'Comptabilité',action:'+ Mouvement'},settings:{title:'Paramètres'}};
+
+function showPage(id,el){
   document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
-  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('on'));
   document.getElementById('pg-'+id).classList.add('on');
-  document.querySelectorAll('.nb').forEach(b=>{if(b.textContent.toLowerCase().includes(id)||b.getAttribute('onclick')&&b.getAttribute('onclick').includes("'"+id+"'"))b.classList.add('on')});
-  renders[id]&&renders[id]();
+  if(el)el.classList.add('on');
+  else document.querySelectorAll('.nav-item').forEach(n=>{if(n.getAttribute('onclick')&&n.getAttribute('onclick').includes("'"+id+"'"))n.classList.add('on')});
+  currentPage=id;
+  var meta=pagesMeta[id];
+  document.getElementById('topbar-title').textContent=meta.title;
+  var ab=document.getElementById('topbar-action');
+  if(meta.action){ab.style.display='';ab.textContent=meta.action}else ab.style.display='none';
+  if(renders[id])renders[id]();
+  updateBadges();
 }
 
-// ===== MODALS =====
-function openModal(id){
-  document.getElementById(id).classList.add('on');
-  if(id==='modal-new-resa')fillAptSelects('nr-apt');
-  if(id==='modal-mvt'){fillAptSelects('mvt-apt',true);document.getElementById('mvt-date').value=today()}
-  if(id==='modal-pdj'){fillAptSelects('pdj-apt');document.getElementById('pdj-date').value=tomorrow()}
-  if(id==='modal-task')fillAptSelects('task-apt');
+function topbarAction(){
+  var map={reservations:()=>openResaModal(null),menage:()=>openTaskModal(null),petitdej:()=>openPdjModal(null),compta:()=>openMvtModal(null)};
+  if(map[currentPage])map[currentPage]();
 }
+
+function updateBadges(){
+  document.getElementById('nb-resa').textContent=S.reservations.filter(r=>r.statut==='confirmee').length;
+  var p=S.tasks.filter(t=>!t.done).length;
+  var nb=document.getElementById('nb-tasks');
+  if(p){nb.style.display='';nb.textContent=p}else nb.style.display='none';
+  document.getElementById('apt-count-display').textContent=S.apts.length+' appartements';
+}
+
+function openModal(id){document.getElementById(id).classList.add('on')}
 function closeModal(id){document.getElementById(id).classList.remove('on')}
 document.querySelectorAll('.modal-overlay').forEach(m=>m.addEventListener('click',function(e){if(e.target===this)this.classList.remove('on')}));
 
-function fillAptSelects(id,withEmpty){
+function fillSel(id,withEmpty){
   var s=document.getElementById(id);s.innerHTML='';
   if(withEmpty){var o=document.createElement('option');o.value='';o.textContent='—';s.appendChild(o)}
   S.apts.forEach(a=>{var o=document.createElement('option');o.value=a.id;o.textContent=a.id+' · '+a.nom;s.appendChild(o)});
 }
+function setVal(id,v){var el=document.getElementById(id);if(el)el.value=v===null||v===undefined?'':v}
 
-// ===== UTILS =====
 function today(){return new Date().toISOString().slice(0,10)}
 function tomorrow(){var d=new Date();d.setDate(d.getDate()+1);return d.toISOString().slice(0,10)}
 function fmtDate(s){if(!s)return'';var p=s.split('-');return p[2]+'/'+p[1]+'/'+p[0]}
 function daysBetween(a,b){return Math.round((new Date(b)-new Date(a))/86400000)}
-function getApt(id){return S.apts.find(a=>a.id===id)||{}}
+function getApt(id){return S.apts.find(a=>a.id===id)||{nom:'',cap:0,prix:0}}
 function nextId(arr){return arr.length?Math.max(...arr.map(x=>x.id))+1:1}
-
-// ===== DASHBOARD =====
-function renderDashboard(){
-  // alerts
-  var az=document.getElementById('alert-zone');az.innerHTML='';
-  var tod=today();
-  var arrivals=S.reservations.filter(r=>r.arr===tod&&r.statut==='confirmee');
-  var departures=S.reservations.filter(r=>r.dep===tod&&r.statut==='confirmee');
-  if(arrivals.length||departures.length){
-    az.innerHTML='<div class="alert-bar">⚠ Aujourd\'hui : '+arrivals.length+' arrivée(s), '+departures.length+' départ(s)</div>';
-  }
-  // kpis
-  var occ=S.apts.filter(a=>a.statut==='occupe').length;
-  var total=S.apts.length;
-  var ca=S.mouvements.filter(m=>m.type==='recette').reduce((s,m)=>s+m.mnt,0);
-  var pdj_tomorrow=S.pdjs.filter(p=>p.date===tomorrow()).reduce((s,p)=>s+p.buffet,0);
-  document.getElementById('kpi-zone').innerHTML=
-    kpiHtml('Taux d\'occupation',Math.round(occ/total*100)+'%',occ+' / '+total+' apparts')+
-    kpiHtml('CA total',ca.toLocaleString('fr-FR')+' €',S.mouvements.filter(m=>m.type==='recette').length+' encaissements')+
-    kpiHtml('Départs aujourd\'hui',departures.length,departures.map(r=>r.apt).join(', ')||'Aucun')+
-    kpiHtml('Petits-déj. demain',pdj_tomorrow,S.pdjs.filter(p=>p.date===tomorrow()).length+' apparts');
-  // apt grid
-  var ag=document.getElementById('apt-grid-dash');ag.innerHTML='';
-  S.apts.forEach(a=>{ag.innerHTML+=aptCard(a)});
-  // today list
-  var tl=document.getElementById('today-list');tl.innerHTML='';
-  var combined=[...arrivals.map(r=>({...r,type:'arr'})),...departures.map(r=>({...r,type:'dep'}))];
-  if(!combined.length){tl.innerHTML='<div style="color:var(--text3);font-size:13px;padding:8px">Aucun mouvement aujourd\'hui</div>'}
-  else combined.forEach(r=>{
-    tl.innerHTML+='<div class="ri"><div class="ra">'+r.apt+' · '+getApt(r.apt).nom+'</div><div><div class="rc">'+r.client+'</div><div class="rd">'+r.pers+' pers.</div></div><span class="badge '+(r.type==='arr'?'bg':'bb')+'">'+(r.type==='arr'?'Arrivée':'Départ')+'</span></div>';
-  });
-  // next resas
-  var nl=document.getElementById('next-resa-list');nl.innerHTML='';
-  var upcoming=S.reservations.filter(r=>r.arr>tod&&r.statut==='confirmee').sort((a,b)=>a.arr.localeCompare(b.arr)).slice(0,5);
-  if(!upcoming.length){nl.innerHTML='<div style="color:var(--text3);font-size:13px;padding:8px">Aucune réservation à venir</div>'}
-  else upcoming.forEach(r=>{
-    var d=daysBetween(tod,r.arr);
-    nl.innerHTML+='<div class="ri"><div class="ra">'+r.apt+' · '+getApt(r.apt).nom+'</div><div class="rc">'+r.client+'</div><div><div class="rd">'+fmtDate(r.arr)+' → '+fmtDate(r.dep)+'</div></div><span class="badge '+(d===0?'ba':d<=2?'bb':'bg')+'">'+(d===0?'Aujourd\'hui':d===1?'Demain':'Dans '+d+'j')+'</span></div>';
-  });
-}
-
-function kpiHtml(lbl,val,sub){return'<div class="kpi"><div class="kl">'+lbl+'</div><div class="kv">'+val+'</div><div class="ks">'+sub+'</div></div>'}
-function aptCard(a){return'<div class="ap '+a.statut+'" onclick="toggleAptStatus(\''+a.id+'\')"><div class="an">'+a.id+'</div><div class="aname">'+a.nom+'</div><div class="as">'+statusLabel(a.statut)+'</div></div>'}
 function statusLabel(s){return{libre:'Libre',occupe:'Occupé',nettoyer:'À nettoyer',pret:'Prêt'}[s]||s}
+function kpiHtml(icon,lbl,val,sub){return'<div class="kpi"><div class="kpi-icon">'+icon+'</div><div class="kl">'+lbl+'</div><div class="kv">'+val+'</div><div class="ks">'+sub+'</div></div>'}
+
+function aptCardHtml(a){
+  return'<div class="ap '+a.statut+'" onclick="toggleAptStatus(\''+a.id+'\')">'
+    +'<button class="ap-edit" onclick="event.stopPropagation();openAptModal(\''+a.id+'\')">✎</button>'
+    +'<div class="an">'+a.id+'</div><div class="aname">'+a.nom+'</div><div class="as">'+statusLabel(a.statut)+'</div></div>';
+}
 
 function toggleAptStatus(id){
   var a=S.apts.find(x=>x.id===id);if(!a)return;
-  var order=['libre','pret','nettoyer','occupe'];
-  a.statut=order[(order.indexOf(a.statut)+1)%order.length];
+  var o=['libre','pret','nettoyer','occupe'];
+  a.statut=o[(o.indexOf(a.statut)+1)%o.length];
   save();renderDashboard();renderMenage();
 }
 
-// ===== RÉSERVATIONS =====
+// DATE
+function updateDateChip(){
+  var d=new Date();
+  var j=['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+  var m=['jan.','fév.','mar.','avr.','mai','juin','juil.','août','sep.','oct.','nov.','déc.'];
+  document.getElementById('date-chip').textContent=j[d.getDay()]+' '+d.getDate()+' '+m[d.getMonth()]+' '+d.getFullYear();
+}
+
+// DASHBOARD
+function renderDashboard(){
+  var az=document.getElementById('alert-zone');az.innerHTML='';
+  var tod=today();
+  var arr=S.reservations.filter(r=>r.arr===tod&&r.statut==='confirmee');
+  var dep=S.reservations.filter(r=>r.dep===tod&&r.statut==='confirmee');
+  if(arr.length||dep.length)az.innerHTML='<div class="alert-bar">⚠️ Aujourd\'hui : '+arr.length+' arrivée(s) · '+dep.length+' départ(s)</div>';
+  var occ=S.apts.filter(a=>a.statut==='occupe').length,tot=S.apts.length;
+  var ca=S.mouvements.filter(m=>m.type==='recette').reduce((s,m)=>s+m.mnt,0);
+  var pdj=S.pdjs.filter(p=>p.date===tomorrow()).reduce((s,p)=>s+p.buffet,0);
+  document.getElementById('kpi-zone').innerHTML=
+    kpiHtml('🏠','Occupation',Math.round(occ/Math.max(tot,1)*100)+'%',occ+'/'+tot+' occupés')+
+    kpiHtml('💶','CA total',ca.toLocaleString('fr-FR')+' €','recettes')+
+    kpiHtml('🚪','Départs auj.',dep.length,dep.map(r=>r.apt).join(', ')||'Aucun')+
+    kpiHtml('☕','Petits-déj. demain',pdj,S.pdjs.filter(p=>p.date===tomorrow()).length+' apparts');
+  var ag=document.getElementById('apt-grid-dash');ag.innerHTML='';
+  S.apts.forEach(a=>ag.innerHTML+=aptCardHtml(a));
+  var tl=document.getElementById('today-list');tl.innerHTML='';
+  var combined=[...arr.map(r=>({...r,_t:'arr'})),...dep.map(r=>({...r,_t:'dep'}))];
+  if(!combined.length)tl.innerHTML='<div style="color:var(--text3);font-size:13px;padding:6px 0">Aucun mouvement aujourd\'hui</div>';
+  else combined.forEach(r=>tl.innerHTML+='<div class="ri" onclick="openResaModal('+r.id+')"><div class="ra">'+r.apt+' · '+getApt(r.apt).nom+'</div><div><div class="rc">'+r.client+'</div><div class="rd">'+r.pers+' pers.</div></div><span class="badge '+(r._t==='arr'?'bg':'bb')+'">'+(r._t==='arr'?'Arrivée':'Départ')+'</span></div>');
+  var nl=document.getElementById('next-resa-list');nl.innerHTML='';
+  var up=S.reservations.filter(r=>r.arr>tod&&r.statut==='confirmee').sort((a,b)=>a.arr.localeCompare(b.arr)).slice(0,5);
+  if(!up.length)nl.innerHTML='<div style="color:var(--text3);font-size:13px;padding:6px 0">Aucune réservation à venir</div>';
+  else up.forEach(r=>{var d=daysBetween(tod,r.arr);nl.innerHTML+='<div class="ri" onclick="openResaModal('+r.id+')"><div class="ra">'+r.apt+' · '+getApt(r.apt).nom+'</div><div class="rc">'+r.client+'</div><div class="rd">'+fmtDate(r.arr)+' → '+fmtDate(r.dep)+'</div><span class="badge '+(d<=0?'ba':d<=2?'bb':'bg')+'">'+(d<=0?'Auj.':d===1?'Demain':'J+'+d)+'</span></div>'});
+}
+
+// RÉSERVATIONS
 var calMonth=new Date().getMonth(),calYear=new Date().getFullYear();
 
 function renderReservations(){
-  var tbody=document.getElementById('resa-tbody');tbody.innerHTML='';
-  var sorted=[...S.reservations].sort((a,b)=>b.arr.localeCompare(a.arr));
-  sorted.forEach(r=>{
-    var statusMap={confirmee:'<span class="badge bg">Confirmée</span>',option:'<span class="badge ba">Option</span>',annulee:'<span class="badge br">Annulée</span>'};
-    tbody.innerHTML+='<tr><td><b style="color:var(--amber)">'+r.apt+'</b> · '+getApt(r.apt).nom+'</td><td>'+r.client+'</td><td>'+fmtDate(r.arr)+'</td><td>'+fmtDate(r.dep)+'</td><td>'+r.pers+'</td><td style="color:var(--green)">'+r.mnt.toLocaleString('fr-FR')+' €</td><td>'+statusMap[r.statut]+'</td><td><button class="btn btn-danger btn-sm" onclick="deleteResa('+r.id+')">✕</button></td></tr>';
+  var tb=document.getElementById('resa-tbody');tb.innerHTML='';
+  var sm={confirmee:'<span class="badge bg">Confirmée</span>',option:'<span class="badge ba">Option</span>',annulee:'<span class="badge br">Annulée</span>'};
+  [...S.reservations].sort((a,b)=>b.arr.localeCompare(a.arr)).forEach(r=>{
+    tb.innerHTML+='<tr onclick="openResaModal('+r.id+')" style="cursor:pointer"><td><b style="color:var(--amber)">'+r.apt+'</b></td><td>'+r.client+'</td><td>'+fmtDate(r.arr)+'</td><td>'+fmtDate(r.dep)+'</td><td>'+r.pers+'</td><td style="color:var(--green);font-weight:600">'+r.mnt.toLocaleString('fr-FR')+' €</td><td>'+sm[r.statut]+'</td><td style="color:var(--text3);font-size:11px">'+r.notes+'</td><td class="td-actions"><button class="btn btn-ghost btn-sm" onclick="event.stopPropagation();openResaModal('+r.id+')">✎</button></td></tr>';
   });
   renderCal();
 }
 
 function setResaTab(t,btn){
-  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));btn.classList.add('on');
   document.getElementById('resa-tab-liste').style.display=t==='liste'?'block':'none';
   document.getElementById('resa-tab-calendrier').style.display=t==='calendrier'?'block':'none';
   if(t==='calendrier')renderCal();
 }
 
 function renderCal(){
-  var monthNames=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
-  document.getElementById('cal-month-lbl').textContent=monthNames[calMonth]+' '+calYear;
-  var daysInMonth=new Date(calYear,calMonth+1,0).getDate();
+  var mn=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+  document.getElementById('cal-month-lbl').textContent=mn[calMonth]+' '+calYear;
+  var dim=new Date(calYear,calMonth+1,0).getDate();
   var g=document.getElementById('cal-grid');g.innerHTML='';
-  g.style.gridTemplateColumns='80px repeat('+daysInMonth+',1fr)';
-  // header
+  g.style.gridTemplateColumns='75px repeat('+dim+',1fr)';
   g.innerHTML+='<div class="cal-head"></div>';
-  for(var d=1;d<=daysInMonth;d++)g.innerHTML+='<div class="cal-head">'+d+'</div>';
-  // rows
+  for(var d=1;d<=dim;d++)g.innerHTML+='<div class="cal-head">'+d+'</div>';
   S.apts.forEach(a=>{
     g.innerHTML+='<div class="cal-apt-lbl">'+a.id+'</div>';
-    for(var d=1;d<=daysInMonth;d++){
-      var dateStr=calYear+'-'+(calMonth+1<10?'0':'')+(calMonth+1)+'-'+(d<10?'0':'')+d;
-      var cls='cal-cell';
-      var resa=S.reservations.find(r=>r.apt===a.id&&r.statut!=='annulee'&&r.arr<=dateStr&&r.dep>dateStr);
-      if(resa){
-        if(resa.arr===dateStr)cls+=' arr';
-        else cls+=' occ';
-      }
-      var dep=S.reservations.find(r=>r.apt===a.id&&r.statut!=='annulee'&&r.dep===dateStr);
-      if(dep)cls='cal-cell dep';
-      g.innerHTML+='<div class="'+cls+'" title="'+a.id+'"></div>';
+    for(var d=1;d<=dim;d++){
+      var ds=calYear+'-'+String(calMonth+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+      var r=S.reservations.find(r=>r.apt===a.id&&r.statut!=='annulee'&&r.arr<=ds&&r.dep>ds);
+      var rd=S.reservations.find(r=>r.apt===a.id&&r.statut!=='annulee'&&r.dep===ds);
+      var cls='cal-cell'+(rd?' dep':r?(r.arr===ds?' arr':' occ'):'');
+      g.innerHTML+='<div class="'+cls+'" title="'+(r?r.client:rd?rd.client:'')+'"></div>';
     }
   });
 }
 function calPrev(){calMonth--;if(calMonth<0){calMonth=11;calYear--;}renderCal()}
 function calNext(){calMonth++;if(calMonth>11){calMonth=0;calYear++;}renderCal()}
 
+function openResaModal(id){
+  fillSel('nr-apt');
+  document.getElementById('modal-resa-title').textContent=id?'Modifier la réservation':'Nouvelle réservation';
+  document.getElementById('btn-del-resa').style.display=id?'':'none';
+  if(id){
+    var r=S.reservations.find(x=>x.id===id);if(!r)return;
+    setVal('nr-id',r.id);setVal('nr-apt',r.apt);setVal('nr-pers',r.pers);setVal('nr-client',r.client);
+    setVal('nr-tel',r.tel);setVal('nr-email',r.email);setVal('nr-arr',r.arr);setVal('nr-dep',r.dep);
+    setVal('nr-mnt',r.mnt);setVal('nr-statut',r.statut);setVal('nr-notes',r.notes);
+  }else{
+    ['nr-id','nr-client','nr-tel','nr-email','nr-arr','nr-dep','nr-notes'].forEach(i=>setVal(i,''));
+    setVal('nr-pers',2);setVal('nr-mnt','');setVal('nr-statut','confirmee');
+  }
+  openModal('modal-resa');
+}
+
 function saveResa(){
-  var apt=document.getElementById('nr-apt').value;
-  var client=document.getElementById('nr-client').value;
-  var arr=document.getElementById('nr-arr').value;
-  var dep=document.getElementById('nr-dep').value;
-  if(!apt||!client||!arr||!dep){alert('Remplissez les champs obligatoires');return}
-  S.reservations.push({
-    id:nextId(S.reservations),apt,client,
-    tel:document.getElementById('nr-tel').value,
-    email:document.getElementById('nr-email').value,
-    pers:parseInt(document.getElementById('nr-pers').value)||1,
-    arr,dep,
+  var apt=document.getElementById('nr-apt').value,client=document.getElementById('nr-client').value;
+  var arr=document.getElementById('nr-arr').value,dep=document.getElementById('nr-dep').value;
+  if(!apt||!client||!arr||!dep)return alert('Appartement, client, arrivée et départ sont requis.');
+  var existId=parseInt(document.getElementById('nr-id').value);
+  var obj={apt,client,tel:document.getElementById('nr-tel').value,email:document.getElementById('nr-email').value,
+    pers:parseInt(document.getElementById('nr-pers').value)||1,arr,dep,
     mnt:parseFloat(document.getElementById('nr-mnt').value)||0,
     statut:document.getElementById('nr-statut').value,
-    notes:document.getElementById('nr-notes').value
-  });
-  // update apt status
+    notes:document.getElementById('nr-notes').value};
+  if(existId){var r=S.reservations.find(x=>x.id===existId);if(r)Object.assign(r,obj)}
+  else{obj.id=nextId(S.reservations);S.reservations.push(obj)}
   var a=S.apts.find(x=>x.id===apt);
-  if(a&&arr<=today()&&dep>today())a.statut='occupe';
-  save();closeModal('modal-new-resa');renderReservations();
+  if(a&&arr<=today()&&dep>today()&&obj.statut==='confirmee')a.statut='occupe';
+  save();closeModal('modal-resa');renderReservations();updateBadges();
 }
-
-function deleteResa(id){
-  if(!confirm('Supprimer cette réservation ?'))return;
+function deleteResaFromModal(){
+  var id=parseInt(document.getElementById('nr-id').value);
+  if(!id||!confirm('Supprimer cette réservation ?'))return;
   S.reservations=S.reservations.filter(r=>r.id!==id);
-  save();renderReservations();
+  save();closeModal('modal-resa');renderReservations();updateBadges();
 }
 
-// ===== MÉNAGE =====
+// MÉNAGE
 function renderMenage(){
   var ag=document.getElementById('apt-grid-menage');ag.innerHTML='';
-  S.apts.forEach(a=>{ag.innerHTML+=aptCard(a)});
+  S.apts.forEach(a=>ag.innerHTML+=aptCardHtml(a));
   var tl=document.getElementById('tasks-list');tl.innerHTML='';
-  if(!S.tasks.length){tl.innerHTML='<div style="color:var(--text3);font-size:13px;padding:8px">Aucune tâche</div>';return}
+  if(!S.tasks.length){tl.innerHTML='<div style="color:var(--text3);font-size:13px;padding:6px 0">Aucune tâche</div>';return}
+  var pm={haute:'<span class="badge ba">Haute</span>',normale:'<span class="badge bb">Normale</span>',basse:'<span class="badge bg">Basse</span>'};
   S.tasks.forEach(t=>{
-    var prioMap={haute:'<span class="badge ba">Priorité haute</span>',normale:'<span class="badge bb">Normale</span>',basse:'<span class="badge bg">Basse</span>'};
-    tl.innerHTML+='<div class="ri" style="'+(t.done?'opacity:.5':'')+'"><div class="ra">'+t.apt+' · '+getApt(t.apt).nom+'</div><div class="rc" style="'+(t.done?'text-decoration:line-through':'')+'">'+t.desc+'</div>'+prioMap[t.prio]+'<button class="btn btn-ghost btn-sm" onclick="toggleTask('+t.id+')">'+(t.done?'↺':'✓')+'</button><button class="btn btn-danger btn-sm" onclick="deleteTask('+t.id+')">✕</button></div>';
+    tl.innerHTML+='<div class="ri" style="'+(t.done?'opacity:.45':'')+'" onclick="openTaskModal('+t.id+')">'
+      +'<div class="ra">'+t.apt+' · '+getApt(t.apt).nom+'</div>'
+      +'<div class="rc" style="'+(t.done?'text-decoration:line-through':'')+'">'+t.desc+'</div>'
+      +pm[t.prio]
+      +'<div class="ri-actions">'
+      +'<button class="btn btn-ghost btn-sm" onclick="event.stopPropagation();quickToggleTask('+t.id+')">'+(t.done?'↺':'✓')+'</button>'
+      +'</div></div>';
   });
 }
-
+function openTaskModal(id){
+  fillSel('task-apt');
+  document.getElementById('modal-task-title').textContent=id?'Modifier la tâche':'Nouvelle tâche';
+  document.getElementById('btn-del-task').style.display=id?'':'none';
+  if(id){
+    var t=S.tasks.find(x=>x.id===id);if(!t)return;
+    setVal('task-id',t.id);setVal('task-apt',t.apt);setVal('task-prio',t.prio);
+    setVal('task-desc',t.desc);setVal('task-done',String(t.done));
+  }else{
+    setVal('task-id','');setVal('task-desc','');setVal('task-prio','haute');setVal('task-done','false');
+  }
+  openModal('modal-task');
+}
 function saveTask(){
-  var apt=document.getElementById('task-apt').value;
-  var desc=document.getElementById('task-desc').value;
+  var apt=document.getElementById('task-apt').value,desc=document.getElementById('task-desc').value;
   if(!apt||!desc)return;
-  S.tasks.push({id:nextId(S.tasks),apt,desc,prio:document.getElementById('task-prio').value,done:false});
-  save();closeModal('modal-task');renderMenage();
+  var existId=parseInt(document.getElementById('task-id').value);
+  var obj={apt,desc,prio:document.getElementById('task-prio').value,done:document.getElementById('task-done').value==='true'};
+  if(existId){var t=S.tasks.find(x=>x.id===existId);if(t)Object.assign(t,obj)}
+  else{obj.id=nextId(S.tasks);S.tasks.push(obj)}
+  save();closeModal('modal-task');renderMenage();updateBadges();
 }
-function toggleTask(id){var t=S.tasks.find(x=>x.id===id);if(t){t.done=!t.done;save();renderMenage()}}
-function deleteTask(id){S.tasks=S.tasks.filter(t=>t.id!==id);save();renderMenage()}
+function quickToggleTask(id){var t=S.tasks.find(x=>x.id===id);if(t){t.done=!t.done;save();renderMenage();updateBadges()}}
+function deleteTaskFromModal(){
+  var id=parseInt(document.getElementById('task-id').value);
+  if(!id||!confirm('Supprimer ?'))return;
+  S.tasks=S.tasks.filter(t=>t.id!==id);
+  save();closeModal('modal-task');renderMenage();updateBadges();
+}
+function clearDoneTasks(){if(!confirm('Effacer toutes les tâches terminées ?'))return;S.tasks=S.tasks.filter(t=>!t.done);save();renderMenage();updateBadges()}
 
-// ===== PETITS-DÉJEUNERS =====
+// PETITS-DÉJEUNERS
 function renderPetitdej(){
-  var dateLbl=document.getElementById('pdj-date-lbl');
-  var targetDate=tomorrow();
-  dateLbl.textContent='demain '+fmtDate(targetDate);
-  var list=S.pdjs.filter(p=>p.date===targetDate);
-  var totalCouverts=list.reduce((s,p)=>s+p.buffet,0);
-  var totalSpec=list.filter(p=>p.spec).length;
+  var td=tomorrow();
+  document.getElementById('pdj-date-lbl').textContent='demain '+fmtDate(td);
+  var list=S.pdjs.filter(p=>p.date===td);
+  var tc=list.reduce((s,p)=>s+p.buffet,0);
   document.getElementById('pdj-kpis').innerHTML=
-    kpiHtml('Total couverts demain',totalCouverts,list.length+' appartements')+
-    kpiHtml('Régimes spéciaux',totalSpec,'commandes particulières')+
-    kpiHtml('Commandes enregistrées',S.pdjs.length,'toutes dates')+
-    kpiHtml('Apparts servis aujourd\'hui',S.pdjs.filter(p=>p.date===today()).length,'');
+    kpiHtml('🥐','Couverts demain',tc,list.length+' appartements')+
+    kpiHtml('🥗','Régimes spéciaux',list.filter(p=>p.spec).length,'')+
+    kpiHtml('📋','Total commandes',S.pdjs.length,'toutes dates')+
+    kpiHtml('🏠','Appts servis auj.',S.pdjs.filter(p=>p.date===today()).length,'');
   var pl=document.getElementById('pdj-list');pl.innerHTML='';
-  if(!list.length){pl.innerHTML='<div style="color:var(--text3);font-size:13px;padding:8px">Aucune commande pour demain</div>';return}
+  if(!list.length){pl.innerHTML='<div style="color:var(--text3);font-size:13px;padding:6px 0">Aucune commande pour demain</div>';return}
   list.forEach(p=>{
-    pl.innerHTML+='<div class="pi"><div class="pa">'+p.apt+' · '+getApt(p.apt).nom+'</div><div class="ptags"><span class="ptag">Buffet x'+p.buffet+'</span>'+(p.spec?'<span class="ptag">'+p.spec+'</span>':'')+'</div><div class="pc">'+p.buffet+'</div></div>';
+    pl.innerHTML+='<div class="pi" onclick="openPdjModal('+p.id+')">'
+      +'<div class="pa">'+p.apt+' · '+getApt(p.apt).nom+'</div>'
+      +'<div class="ptags"><span class="ptag">Buffet x'+p.buffet+'</span>'+(p.spec?'<span class="ptag">'+p.spec+'</span>':'')+'</div>'
+      +'<div class="pc">'+p.buffet+'</div></div>';
   });
 }
-
+function openPdjModal(id){
+  fillSel('pdj-apt');
+  document.getElementById('modal-pdj-title').textContent=id?'Modifier commande':'Nouvelle commande';
+  document.getElementById('btn-del-pdj').style.display=id?'':'none';
+  if(id){
+    var p=S.pdjs.find(x=>x.id===id);if(!p)return;
+    setVal('pdj-id',p.id);setVal('pdj-apt',p.apt);setVal('pdj-date',p.date);setVal('pdj-buffet',p.buffet);setVal('pdj-spec',p.spec);
+  }else{
+    setVal('pdj-id','');setVal('pdj-date',tomorrow());setVal('pdj-buffet',0);setVal('pdj-spec','');
+  }
+  openModal('modal-pdj');
+}
 function savePdj(){
-  var apt=document.getElementById('pdj-apt').value;
-  var date=document.getElementById('pdj-date').value;
+  var apt=document.getElementById('pdj-apt').value,date=document.getElementById('pdj-date').value;
   if(!apt||!date)return;
-  var existing=S.pdjs.find(p=>p.apt===apt&&p.date===date);
-  if(existing){existing.buffet=parseInt(document.getElementById('pdj-buffet').value)||0;existing.spec=document.getElementById('pdj-spec').value}
-  else S.pdjs.push({id:nextId(S.pdjs),apt,date,buffet:parseInt(document.getElementById('pdj-buffet').value)||0,spec:document.getElementById('pdj-spec').value});
+  var existId=parseInt(document.getElementById('pdj-id').value);
+  var obj={apt,date,buffet:parseInt(document.getElementById('pdj-buffet').value)||0,spec:document.getElementById('pdj-spec').value};
+  if(existId){var p=S.pdjs.find(x=>x.id===existId);if(p)Object.assign(p,obj)}
+  else{obj.id=nextId(S.pdjs);S.pdjs.push(obj)}
+  save();closeModal('modal-pdj');renderPetitdej();
+}
+function deletePdjFromModal(){
+  var id=parseInt(document.getElementById('pdj-id').value);
+  if(!id||!confirm('Supprimer ?'))return;
+  S.pdjs=S.pdjs.filter(p=>p.id!==id);
   save();closeModal('modal-pdj');renderPetitdej();
 }
 
-// ===== COMPTABILITÉ =====
+// COMPTABILITÉ
 function renderCompta(){
-  var recettes=S.mouvements.filter(m=>m.type==='recette').reduce((s,m)=>s+m.mnt,0);
-  var depenses=S.mouvements.filter(m=>m.type==='depense').reduce((s,m)=>s+m.mnt,0);
-  var net=recettes-depenses;
+  var rec=S.mouvements.filter(m=>m.type==='recette').reduce((s,m)=>s+m.mnt,0);
+  var dep=S.mouvements.filter(m=>m.type==='depense').reduce((s,m)=>s+m.mnt,0);
+  var net=rec-dep;
   document.getElementById('compta-kpis').innerHTML=
-    kpiHtml('Total recettes',recettes.toLocaleString('fr-FR')+' €',S.mouvements.filter(m=>m.type==='recette').length+' entrées')+
-    kpiHtml('Total dépenses',depenses.toLocaleString('fr-FR')+' €',S.mouvements.filter(m=>m.type==='depense').length+' sorties')+
-    '<div class="kpi"><div class="kl">Résultat net</div><div class="kv" style="color:'+(net>=0?'var(--green)':'var(--red)')+'">'+net.toLocaleString('fr-FR')+' €</div><div class="ks">'+(net>=0?'Bénéfice':'Déficit')+'</div></div>'+
-    kpiHtml('Nb mouvements',S.mouvements.length,'total enregistrés');
-  // mouvements
+    kpiHtml('📈','Recettes',rec.toLocaleString('fr-FR')+' €',S.mouvements.filter(m=>m.type==='recette').length+' entrées')+
+    kpiHtml('📉','Dépenses',dep.toLocaleString('fr-FR')+' €',S.mouvements.filter(m=>m.type==='depense').length+' sorties')+
+    '<div class="kpi"><div class="kpi-icon">💹</div><div class="kl">Résultat net</div><div class="kv" style="color:'+(net>=0?'var(--green)':'var(--red)')+'">'+net.toLocaleString('fr-FR')+' €</div><div class="ks">'+(net>=0?'Bénéfice':'Déficit')+'</div></div>'+
+    kpiHtml('📂','Mouvements',S.mouvements.length,'enregistrés');
   var ml=document.getElementById('mvt-list');ml.innerHTML='';
-  var sorted=[...S.mouvements].sort((a,b)=>b.date.localeCompare(a.date));
-  sorted.forEach(m=>{
-    ml.innerHTML+='<div class="cr"><span class="cl">'+fmtDate(m.date)+'&nbsp;&nbsp;'+m.lib+'</span><span class="'+(m.type==='recette'?'cp':'cm')+'">'+(m.type==='recette'?'+':'-')+m.mnt.toLocaleString('fr-FR')+' €</span></div>';
+  [...S.mouvements].sort((a,b)=>b.date.localeCompare(a.date)).forEach(m=>{
+    ml.innerHTML+='<div class="cr" onclick="openMvtModal('+m.id+')">'
+      +'<span class="cl">'+fmtDate(m.date)+'&nbsp; '+m.lib+'</span>'
+      +'<span class="'+(m.type==='recette'?'cp':'cm')+'">'+(m.type==='recette'?'+':'-')+m.mnt.toLocaleString('fr-FR')+' €</span>'
+      +'<div class="cr-actions"><button class="btn btn-ghost btn-sm" onclick="event.stopPropagation();openMvtModal('+m.id+')">✎</button></div>'
+      +'</div>';
   });
-  // revenus par apt
   var ra=document.getElementById('rev-by-apt');ra.innerHTML='';
-  var maxRev=Math.max(...S.apts.map(a=>S.mouvements.filter(m=>m.apt===a.id&&m.type==='recette').reduce((s,m)=>s+m.mnt,0)),1);
-  S.apts.forEach(a=>{
-    var rev=S.mouvements.filter(m=>m.apt===a.id&&m.type==='recette').reduce((s,m)=>s+m.mnt,0);
-    ra.innerHTML+='<div class="sbar"><div class="sbar-lbl">'+a.id+' · '+a.nom+'</div><div class="sbar-track"><div class="sbar-fill" style="width:'+Math.round(rev/maxRev*100)+'%"></div></div><div class="sbar-val">'+rev.toLocaleString('fr-FR')+' €</div></div>';
-  });
+  var maxR=Math.max(...S.apts.map(a=>S.mouvements.filter(m=>m.apt===a.id&&m.type==='recette').reduce((s,m)=>s+m.mnt,0)),1);
+  S.apts.forEach(a=>{var r=S.mouvements.filter(m=>m.apt===a.id&&m.type==='recette').reduce((s,m)=>s+m.mnt,0);ra.innerHTML+='<div class="sbar"><div class="sbar-lbl">'+a.id+' · '+a.nom+'</div><div class="sbar-track"><div class="sbar-fill" style="width:'+Math.round(r/maxR*100)+'%"></div></div><div class="sbar-val">'+r.toLocaleString('fr-FR')+' €</div></div>'});
 }
-
+function openMvtModal(id){
+  fillSel('mvt-apt',true);
+  document.getElementById('modal-mvt-title').textContent=id?'Modifier mouvement':'Nouveau mouvement';
+  document.getElementById('btn-del-mvt').style.display=id?'':'none';
+  if(id){
+    var m=S.mouvements.find(x=>x.id===id);if(!m)return;
+    setVal('mvt-id',m.id);setVal('mvt-lib',m.lib);setVal('mvt-type',m.type);setVal('mvt-mnt',m.mnt);setVal('mvt-date',m.date);setVal('mvt-apt',m.apt);
+  }else{
+    setVal('mvt-id','');setVal('mvt-lib','');setVal('mvt-mnt','');setVal('mvt-date',today());setVal('mvt-apt','');
+  }
+  openModal('modal-mvt');
+}
 function saveMvt(){
-  var lib=document.getElementById('mvt-lib').value;
-  var mnt=parseFloat(document.getElementById('mvt-mnt').value);
+  var lib=document.getElementById('mvt-lib').value,mnt=parseFloat(document.getElementById('mvt-mnt').value);
   if(!lib||!mnt)return;
-  S.mouvements.push({id:nextId(S.mouvements),lib,type:document.getElementById('mvt-type').value,mnt,date:document.getElementById('mvt-date').value,apt:document.getElementById('mvt-apt').value});
+  var existId=parseInt(document.getElementById('mvt-id').value);
+  var obj={lib,type:document.getElementById('mvt-type').value,mnt,date:document.getElementById('mvt-date').value,apt:document.getElementById('mvt-apt').value};
+  if(existId){var m=S.mouvements.find(x=>x.id===existId);if(m)Object.assign(m,obj)}
+  else{obj.id=nextId(S.mouvements);S.mouvements.push(obj)}
+  save();closeModal('modal-mvt');renderCompta();
+}
+function deleteMvtFromModal(){
+  var id=parseInt(document.getElementById('mvt-id').value);
+  if(!id||!confirm('Supprimer ?'))return;
+  S.mouvements=S.mouvements.filter(m=>m.id!==id);
   save();closeModal('modal-mvt');renderCompta();
 }
 
-// ===== PARAMÈTRES =====
+// PARAMÈTRES
 function renderSettings(){
-  document.getElementById('set-nom').value=S.settings.nom;
-  document.getElementById('set-loc').value=S.settings.loc;
+  setVal('set-nom',S.settings.nom);setVal('set-loc',S.settings.loc);
   var al=document.getElementById('apt-settings-list');al.innerHTML='';
   S.apts.forEach(a=>{
-    al.innerHTML+='<div class="ri"><div class="ra">'+a.id+'</div><div class="rc">'+a.nom+' · '+a.cap+' pers. · '+a.prix+' €/nuit</div><button class="btn btn-danger btn-sm" onclick="deleteApt(\''+a.id+'\')">✕</button></div>';
+    al.innerHTML+='<div class="ri" onclick="openAptModal(\''+a.id+'\')">'
+      +'<div class="ra">'+a.id+'</div>'
+      +'<div class="rc">'+a.nom+' · '+a.cap+' pers. · '+a.prix+' €/nuit</div>'
+      +'<span class="badge '+(a.statut==='occupe'?'br':a.statut==='libre'?'bg':a.statut==='pret'?'bb':'ba')+'">'+statusLabel(a.statut)+'</span>'
+      +'</div>';
   });
 }
-
 function saveSettings(){
   S.settings.nom=document.getElementById('set-nom').value||'Résidence';
   S.settings.loc=document.getElementById('set-loc').value;
-  document.getElementById('res-name-display').textContent='— '+S.settings.nom;
-  save();alert('Paramètres enregistrés ✓');
+  document.getElementById('res-name-display').textContent=S.settings.nom;
+  document.getElementById('res-loc-display').textContent=S.settings.loc;
+  save();
 }
-
-function saveNewApt(){
-  var num=document.getElementById('apt-num').value.trim();
-  var nom=document.getElementById('apt-nomv').value.trim();
+function openAptModal(id){
+  document.getElementById('modal-apt-title').textContent=id?'Modifier l\'appartement '+id:'Nouvel appartement';
+  document.getElementById('btn-del-apt').style.display=id?'':'none';
+  if(id){
+    var a=S.apts.find(x=>x.id===id);if(!a)return;
+    setVal('apt-orig-id',a.id);setVal('apt-num',a.id);setVal('apt-nomv',a.nom);setVal('apt-cap',a.cap);setVal('apt-prix',a.prix);setVal('apt-statut',a.statut);
+  }else{
+    ['apt-orig-id','apt-num','apt-nomv'].forEach(i=>setVal(i,''));setVal('apt-cap',4);setVal('apt-prix',120);setVal('apt-statut','libre');
+  }
+  openModal('modal-apt');
+}
+function saveApt(){
+  var num=document.getElementById('apt-num').value.trim(),nom=document.getElementById('apt-nomv').value.trim();
   if(!num||!nom)return;
-  if(S.apts.find(a=>a.id===num)){alert('Cet identifiant existe déjà');return}
-  S.apts.push({id:num,nom,cap:parseInt(document.getElementById('apt-cap').value)||4,prix:parseFloat(document.getElementById('apt-prix').value)||100,statut:'libre'});
-  save();closeModal('modal-new-apt');renderSettings();
+  var origId=document.getElementById('apt-orig-id').value;
+  if(origId){
+    var a=S.apts.find(x=>x.id===origId);
+    if(a){a.id=num;a.nom=nom;a.cap=parseInt(document.getElementById('apt-cap').value)||4;a.prix=parseFloat(document.getElementById('apt-prix').value)||100;a.statut=document.getElementById('apt-statut').value;}
+  }else{
+    if(S.apts.find(a=>a.id===num))return alert('ID déjà utilisé');
+    S.apts.push({id:num,nom,cap:parseInt(document.getElementById('apt-cap').value)||4,prix:parseFloat(document.getElementById('apt-prix').value)||100,statut:document.getElementById('apt-statut').value||'libre'});
+  }
+  save();closeModal('modal-apt');renderSettings();updateBadges();
 }
-
-function deleteApt(id){
-  if(!confirm('Supprimer l\'appartement '+id+' ? Les réservations liées seront également supprimées.'))return;
-  S.apts=S.apts.filter(a=>a.id!==id);
-  S.reservations=S.reservations.filter(r=>r.apt!==id);
-  save();renderSettings();
+function deleteAptFromModal(){
+  var id=document.getElementById('apt-orig-id').value;
+  if(!id||!confirm('Supprimer '+id+' et ses réservations ?'))return;
+  S.apts=S.apts.filter(a=>a.id!==id);S.reservations=S.reservations.filter(r=>r.apt!==id);
+  save();closeModal('modal-apt');renderSettings();updateBadges();
 }
+function resetAll(){if(!confirm('⚠️ Réinitialiser TOUTES les données ?'))return;S=JSON.parse(JSON.stringify(defaultData));save();location.reload()}
 
-// ===== RENDER MAP =====
-var renders={
-  dashboard:renderDashboard,
-  reservations:renderReservations,
-  menage:renderMenage,
-  petitdej:renderPetitdej,
-  compta:renderCompta,
-  settings:renderSettings
-};
+var renders={dashboard:renderDashboard,reservations:renderReservations,menage:renderMenage,petitdej:renderPetitdej,compta:renderCompta,settings:renderSettings};
 
-// ===== INIT =====
-document.getElementById('res-name-display').textContent='— '+S.settings.nom;
-renderDashboard();
+document.getElementById('res-name-display').textContent=S.settings.nom;
+document.getElementById('res-loc-display').textContent=S.settings.loc;
+updateDateChip();updateBadges();renderDashboard();
 </script>
 </body>
 </html>
