@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AlpiGest</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0f12;--bg2:#151820;--bg3:#1c2028;--bg4:#242830;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
+  --amber:#c9973a;--amber2:#e8b45a;--amber-bg:rgba(201,151,58,0.13);
+  --text:#e8e4dc;--text2:#9a9288;--text3:#5a5450;
+  --green:#4a9a5a;--green-bg:rgba(74,154,90,0.13);
+  --red:#c04040;--red-bg:rgba(192,64,64,0.13);
+  --blue:#4a7ab0;--blue-bg:rgba(74,122,176,0.13);
+}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;font-size:14px}
+/* HEADER */
+.hdr{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:50px;position:sticky;top:0;z-index:100}
+.logo{color:var(--amber);font-size:16px;font-weight:700;cursor:pointer}
+.logo small{color:var(--text2);font-size:11px;font-weight:400;margin-left:8px}
+.nav{display:flex;gap:2px}
+.nb{background:transparent;border:none;color:var(--text2);padding:6px 11px;border-radius:6px;cursor:pointer;font-size:12px;transition:.15s}
+.nb:hover{background:var(--bg3);color:var(--text)}
+.nb.on{background:var(--amber-bg);color:var(--amber)}
+/* MAIN */
+.main{padding:18px 20px;max-width:1100px;margin:0 auto}
+.pg{display:none}.pg.on{display:block}
+/* CARD */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:15px;margin-bottom:13px}
+.ct{font-size:11px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:13px;padding-bottom:8px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+/* KPIS */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.kpi{background:var(--bg2);border:1px solid var(--border);border-left:2px solid var(--amber);border-radius:10px;padding:13px 15px}
+.kl{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px}
+.kv{font-size:21px;font-weight:700}
+.ks{font-size:11px;color:var(--text2);margin-top:2px}
+/* GRIDS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+/* APTS */
+.ag{display:grid;grid-template-columns:repeat(auto-fill,minmax(95px,1fr));gap:8px}
+.ap{border-radius:8px;padding:11px 7px;text-align:center;cursor:pointer;transition:.15s;border:1px solid transparent}
+.ap:hover{transform:translateY(-1px);filter:brightness(1.1)}
+.ap.libre{background:var(--green-bg);border-color:rgba(74,154,90,.3)}
+.ap.occupe{background:var(--red-bg);border-color:rgba(192,64,64,.3)}
+.ap.nettoyer{background:var(--amber-bg);border-color:rgba(201,151,58,.3)}
+.ap.pret{background:var(--blue-bg);border-color:rgba(74,122,176,.3)}
+.an{font-size:14px;font-weight:700;color:var(--text)}
+.aname{font-size:9px;color:var(--text3);margin:2px 0}
+.as{font-size:10px;font-weight:600}
+.ap.libre .as{color:var(--green)}
+.ap.occupe .as{color:var(--red)}
+.ap.nettoyer .as{color:var(--amber)}
+.ap.pret .as{color:var(--blue)}
+/* LISTE RESA */
+.rl{display:flex;flex-direction:column;gap:6px}
+.ri{display:flex;align-items:center;gap:9px;padding:9px 11px;background:var(--bg3);border-radius:8px;border-left:2px solid var(--amber)}
+.ra{font-size:12px;font-weight:600;color:var(--amber);min-width:100px}
+.rc{font-size:13px;color:var(--text);flex:1}
+.rd{font-size:11px;color:var(--text2)}
+/* BADGES */
+.badge{font-size:10px;padding:3px 8px;border-radius:10px;font-weight:600;white-space:nowrap}
+.bg{background:var(--green-bg);color:var(--green);border:1px solid rgba(74,154,90,.25)}
+.ba{background:var(--amber-bg);color:var(--amber);border:1px solid rgba(201,151,58,.25)}
+.bb{background:var(--blue-bg);color:var(--blue);border:1px solid rgba(74,122,176,.25)}
+.br{background:var(--red-bg);color:var(--red);border:1px solid rgba(192,64,64,.25)}
+/* PETITS DEJ */
+.pdj{display:flex;flex-direction:column;gap:6px}
+.pi{display:grid;grid-template-columns:95px 1fr 36px;align-items:center;gap:9px;padding:9px 11px;background:var(--bg3);border-radius:8px}
+.pa{font-size:12px;font-weight:600;color:var(--amber)}
+.ptags{display:flex;gap:5px;flex-wrap:wrap}
+.ptag{font-size:10px;padding:2px 7px;border-radius:8px;background:var(--bg4);border:1px solid var(--border2);color:var(--text2)}
+.pc{font-size:18px;font-weight:700;text-align:right;color:var(--text)}
+/* COMPTA */
+.cr{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px}
+.cr:last-child{border-bottom:none}
+.cl{color:var(--text2)}
+.cp{color:var(--green);font-weight:600}
+.cm{color:var(--red);font-weight:600}
+/* CALENDRIER */
+.cal-grid{display:grid;grid-template-columns:80px repeat(31,1fr);gap:1px;font-size:10px;overflow-x:auto}
+.cal-head{background:var(--bg3);padding:5px 3px;text-align:center;color:var(--text2);border-radius:3px;font-weight:600}
+.cal-apt-lbl{background:var(--bg3);padding:5px 6px;color:var(--amber);font-weight:600;border-radius:3px;font-size:10px}
+.cal-cell{height:26px;border-radius:2px;background:var(--bg3)}
+.cal-cell.occ{background:rgba(192,64,64,.5)}
+.cal-cell.arr{background:rgba(74,154,90,.7)}
+.cal-cell.dep{background:rgba(74,122,176,.7)}
+/* FORMS */
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.form-row.full{grid-template-columns:1fr}
+label{font-size:11px;color:var(--text2);margin-bottom:4px;display:block}
+input,select,textarea{width:100%;background:var(--bg3);border:1px solid var(--border2);color:var(--text);padding:8px 10px;border-radius:7px;font-size:13px;outline:none;transition:.15s}
+input:focus,select:focus,textarea:focus{border-color:var(--amber);background:var(--bg4)}
+select option{background:var(--bg2)}
+/* BTNS */
+.btn{padding:8px 16px;border-radius:7px;border:none;cursor:pointer;font-size:13px;font-weight:600;transition:.15s}
+.btn-primary{background:var(--amber);color:#0d0f12}
+.btn-primary:hover{background:var(--amber2)}
+.btn-ghost{background:transparent;color:var(--text2);border:1px solid var(--border2)}
+.btn-ghost:hover{background:var(--bg3);color:var(--text)}
+.btn-danger{background:var(--red-bg);color:var(--red);border:1px solid rgba(192,64,64,.25)}
+.btn-danger:hover{background:rgba(192,64,64,.25)}
+.btn-sm{padding:5px 10px;font-size:11px}
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;align-items:center;justify-content:center}
+.modal-overlay.on{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:22px;width:480px;max-width:95vw;max-height:90vh;overflow-y:auto}
+.modal-title{font-size:15px;font-weight:700;color:var(--text);margin-bottom:16px;display:flex;justify-content:space-between;align-items:center}
+.close-btn{background:transparent;border:none;color:var(--text2);font-size:18px;cursor:pointer;padding:2px 6px;border-radius:4px}
+.close-btn:hover{background:var(--bg3);color:var(--text)}
+/* ALERTS */
+.alert-bar{background:var(--amber-bg);border:1px solid rgba(201,151,58,.3);border-radius:8px;padding:9px 14px;margin-bottom:13px;font-size:12px;color:var(--amber);display:flex;align-items:center;gap:8px}
+/* LEGEND */
+.leg{display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.li{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--text3)}
+.ld{width:8px;height:8px;border-radius:50%}
+/* TABS */
+.tabs{display:flex;gap:4px;margin-bottom:14px}
+.tab{padding:6px 14px;border-radius:6px;border:1px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;font-size:12px;transition:.15s}
+.tab.on{background:var(--amber-bg);color:var(--amber);border-color:rgba(201,151,58,.3)}
+/* TABLE */
+table{width:100%;border-collapse:collapse}
+th{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;padding:7px 10px;border-bottom:1px solid var(--border);text-align:left}
+td{padding:9px 10px;border-bottom:1px solid var(--border);font-size:13px;color:var(--text2)}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--bg3);color:var(--text)}
+/* STAT BARS */
+.sbar{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.sbar-lbl{font-size:12px;color:var(--text2);min-width:90px}
+.sbar-track{flex:1;background:var(--bg3);border-radius:4px;height:6px;overflow:hidden}
+.sbar-fill{height:100%;background:var(--amber);border-radius:4px;transition:.4s}
+.sbar-val{font-size:12px;color:var(--text);min-width:35px;text-align:right}
+/* SCROLL */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:3px}
+@media(max-width:700px){
+  .kpis{grid-template-columns:1fr 1fr}
+  .g2{grid-template-columns:1fr}
+  .nav .nb{padding:6px 7px;font-size:11px}
+  .main{padding:12px}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="logo" onclick="showPage('dashboard')">AlpiGest <small id="res-name-display">— Résidence</small></div>
+  <div class="nav">
+    <button class="nb on" onclick="showPage('dashboard')">Tableau de bord</button>
+    <button class="nb" onclick="showPage('reservations')">Réservations</button>
+    <button class="nb" onclick="showPage('menage')">Ménage</button>
+    <button class="nb" onclick="showPage('petitdej')">Petits-déjeuners</button>
+    <button class="nb" onclick="showPage('compta')">Comptabilité</button>
+    <button class="nb" onclick="showPage('settings')">⚙ Paramètres</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- === DASHBOARD === -->
+<div id="pg-dashboard" class="pg on">
+  <div id="alert-zone"></div>
+  <div class="kpis" id="kpi-zone"></div>
+  <div class="g2">
+    <div class="card">
+      <div class="ct">État des appartements
+        <button class="btn btn-ghost btn-sm" onclick="showPage('menage')">Voir ménage →</button>
+      </div>
+      <div class="leg">
+        <div class="li"><div class="ld" style="background:var(--green)"></div>Libre</div>
+        <div class="li"><div class="ld" style="background:var(--red)"></div>Occupé</div>
+        <div class="li"><div class="ld" style="background:var(--amber)"></div>À nettoyer</div>
+        <div class="li"><div class="ld" style="background:var(--blue)"></div>Prêt</div>
+      </div>
+      <div class="ag" id="apt-grid-dash"></div>
+    </div>
+    <div class="card">
+      <div class="ct">Arrivées & départs aujourd\'hui</div>
+      <div class="rl" id="today-list"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="ct">Prochaines réservations</div>
+    <div class="rl" id="next-resa-list"></div>
+  </div>
+</div>
+
+<!-- === RÉSERVATIONS === -->
+<div id="pg-reservations" class="pg">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+    <div class="tabs">
+      <button class="tab on" onclick="setResaTab('liste',this)">Liste</button>
+      <button class="tab" onclick="setResaTab('calendrier',this)">Calendrier</button>
+    </div>
+    <button class="btn btn-primary" onclick="openModal('modal-new-resa')">+ Nouvelle réservation</button>
+  </div>
+  <div id="resa-tab-liste">
+    <div class="card">
+      <div class="ct">Toutes les réservations</div>
+      <table id="resa-table">
+        <thead><tr>
+          <th>Appartement</th><th>Client</th><th>Arrivée</th><th>Départ</th><th>Pers.</th><th>Montant</th><th>Statut</th><th></th>
+        </tr></thead>
+        <tbody id="resa-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+  <div id="resa-tab-calendrier" style="display:none">
+    <div class="card">
+      <div class="ct">Calendrier — <span id="cal-month-lbl"></span>
+        <div style="display:flex;gap:6px">
+          <button class="btn btn-ghost btn-sm" onclick="calPrev()">‹</button>
+          <button class="btn btn-ghost btn-sm" onclick="calNext()">›</button>
+        </div>
+      </div>
+      <div style="overflow-x:auto"><div class="cal-grid" id="cal-grid"></div></div>
+      <div class="leg" style="margin-top:10px;margin-bottom:0">
+        <div class="li"><div class="ld" style="background:rgba(192,64,64,.5)"></div>Occupé</div>
+        <div class="li"><div class="ld" style="background:rgba(74,154,90,.7)"></div>Arrivée</div>
+        <div class="li"><div class="ld" style="background:rgba(74,122,176,.7)"></div>Départ</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- === MÉNAGE === -->
+<div id="pg-menage" class="pg">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+    <h2 style="font-size:15px;color:var(--text)">Ménage & états des appartements</h2>
+    <button class="btn btn-primary btn-sm" onclick="openModal('modal-task')">+ Tâche</button>
+  </div>
+  <div class="card">
+    <div class="ct">État en temps réel</div>
+    <div class="ag" id="apt-grid-menage"></div>
+  </div>
+  <div class="card">
+    <div class="ct">Tâches du jour</div>
+    <div id="tasks-list" class="rl"></div>
+  </div>
+</div>
+
+<!-- === PETITS-DÉJEUNERS === -->
+<div id="pg-petitdej" class="pg">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+    <h2 style="font-size:15px;color:var(--text)">Petits-déjeuners</h2>
+    <button class="btn btn-primary btn-sm" onclick="openModal('modal-pdj')">+ Commande</button>
+  </div>
+  <div class="kpis" id="pdj-kpis"></div>
+  <div class="card">
+    <div class="ct">Commandes — <span id="pdj-date-lbl"></span></div>
+    <div class="pdj" id="pdj-list"></div>
+  </div>
+</div>
+
+<!-- === COMPTABILITÉ === -->
+<div id="pg-compta" class="pg">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+    <h2 style="font-size:15px;color:var(--text)">Comptabilité</h2>
+    <button class="btn btn-primary btn-sm" onclick="openModal('modal-mvt')">+ Mouvement</button>
+  </div>
+  <div class="kpis" id="compta-kpis"></div>
+  <div class="g2">
+    <div class="card">
+      <div class="ct">Mouvements récents</div>
+      <div id="mvt-list"></div>
+    </div>
+    <div class="card">
+      <div class="ct">Revenus par appartement</div>
+      <div id="rev-by-apt"></div>
+    </div>
+  </div>
+</div>
+
+<!-- === PARAMÈTRES === -->
+<div id="pg-settings" class="pg">
+  <div class="g2">
+    <div class="card">
+      <div class="ct">Informations résidence</div>
+      <div class="form-row full"><label>Nom de la résidence</label><input id="set-nom" type="text" placeholder="Les Mélèzes"></div>
+      <div class="form-row full"><label>Localisation</label><input id="set-loc" type="text" placeholder="Savoie, France"></div>
+      <button class="btn btn-primary" style="margin-top:8px" onclick="saveSettings()">Enregistrer</button>
+    </div>
+    <div class="card">
+      <div class="ct">Appartements <button class="btn btn-primary btn-sm" onclick="openModal('modal-new-apt')">+ Ajouter</button></div>
+      <div id="apt-settings-list" class="rl"></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<!-- ====== MODALS ====== -->
+
+<!-- Nouvelle réservation -->
+<div class="modal-overlay" id="modal-new-resa">
+  <div class="modal">
+    <div class="modal-title">Nouvelle réservation <button class="close-btn" onclick="closeModal('modal-new-resa')">✕</button></div>
+    <div class="form-row">
+      <div><label>Appartement</label><select id="nr-apt"></select></div>
+      <div><label>Nb personnes</label><input id="nr-pers" type="number" min="1" value="2"></div>
+    </div>
+    <div class="form-row full"><label>Nom du client</label><input id="nr-client" type="text" placeholder="Famille Martin"></div>
+    <div class="form-row full"><label>Téléphone</label><input id="nr-tel" type="text" placeholder="06 12 34 56 78"></div>
+    <div class="form-row full"><label>Email</label><input id="nr-email" type="email" placeholder="client@email.fr"></div>
+    <div class="form-row">
+      <div><label>Arrivée</label><input id="nr-arr" type="date"></div>
+      <div><label>Départ</label><input id="nr-dep" type="date"></div>
+    </div>
+    <div class="form-row">
+      <div><label>Montant (€)</label><input id="nr-mnt" type="number" min="0" placeholder="0"></div>
+      <div><label>Statut</label>
+        <select id="nr-statut">
+          <option value="confirmee">Confirmée</option>
+          <option value="option">En option</option>
+          <option value="annulee">Annulée</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row full"><label>Notes</label><textarea id="nr-notes" rows="2" placeholder="Informations complémentaires..."></textarea></div>
+    <div style="display:flex;gap:8px;margin-top:12px">
+      <button class="btn btn-primary" onclick="saveResa()">Enregistrer</button>
+      <button class="btn btn-ghost" onclick="closeModal('modal-new-resa')">Annuler</button>
+    </div>
+  </div>
+</div>
+
+<!-- Nouveau mouvement comptable -->
+<div class="modal-overlay" id="modal-mvt">
+  <div class="modal">
+    <div class="modal-title">Nouveau mouvement <button class="close-btn" onclick="closeModal('modal-mvt')">✕</button></div>
+    <div class="form-row full"><label>Libellé</label><input id="mvt-lib" type="text" placeholder="Encaissement client / Achat fournitures..."></div>
+    <div class="form-row">
+      <div><label>Type</label>
+        <select id="mvt-type">
+          <option value="recette">Recette (+)</option>
+          <option value="depense">Dépense (−)</option>
+        </select>
+      </div>
+      <div><label>Montant (€)</label><input id="mvt-mnt" type="number" min="0" placeholder="0"></div>
+    </div>
+    <div class="form-row">
+      <div><label>Date</label><input id="mvt-date" type="date"></div>
+      <div><label>Appartement (optionnel)</label><select id="mvt-apt"><option value="">—</option></select></div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:12px">
+      <button class="btn btn-primary" onclick="saveMvt()">Enregistrer</button>
+      <button class="btn btn-ghost" onclick="closeModal('modal-mvt')">Annuler</button>
+    </div>
+  </div>
+</div>
+
+<!-- Commande petit-déjeuner -->
+<div class="modal-overlay" id="modal-pdj">
+  <div class="modal">
+    <div class="modal-title">Commande petit-déjeuner <button class="close-btn" onclick="closeModal('modal-pdj')">✕</button></div>
+    <div class="form-row">
+      <div><label>Appartement</label><select id="pdj-apt"></select></div>
+      <div><label>Date</label><input id="pdj-date" type="date"></div>
+    </div>
+    <div class="form-row">
+      <div><label>Nb couverts buffet</label><input id="pdj-buffet" type="number" min="0" value="0"></div>
+      <div><label>Régimes spéciaux</label><input id="pdj-spec" type="text" placeholder="Sans gluten x1, végétalien x1..."></div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:12px">
+      <button class="btn btn-primary" onclick="savePdj()">Enregistrer</button>
+      <button class="btn btn-ghost" onclick="closeModal('modal-pdj')">Annuler</button>
+    </div>
+  </div>
+</div>
+
+<!-- Tâche ménage -->
+<div class="modal-overlay" id="modal-task">
+  <div class="modal">
+    <div class="modal-title">Nouvelle tâche ménage <button class="close-btn" onclick="closeModal('modal-task')">✕</button></div>
+    <div class="form-row">
+      <div><label>Appartement</label><select id="task-apt"></select></div>
+      <div><label>Priorité</label>
+        <select id="task-prio">
+          <option value="haute">Haute</option>
+          <option value="normale">Normale</option>
+          <option value="basse">Basse</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row full"><label>Description</label><input id="task-desc" type="text" placeholder="Ménage complet + linge..."></div>
+    <div style="display:flex;gap:8px;margin-top:12px">
+      <button class="btn btn-primary" onclick="saveTask()">Enregistrer</button>
+      <button class="btn btn-ghost" onclick="closeModal('modal-task')">Annuler</button>
+    </div>
+  </div>
+</div>
+
+<!-- Nouvel appartement -->
+<div class="modal-overlay" id="modal-new-apt">
+  <div class="modal">
+    <div class="modal-title">Ajouter un appartement <button class="close-btn" onclick="closeModal('modal-new-apt')">✕</button></div>
+    <div class="form-row">
+      <div><label>Numéro / Code</label><input id="apt-num" type="text" placeholder="A9"></div>
+      <div><label>Nom</label><input id="apt-nomv" type="text" placeholder="Bellecôte"></div>
+    </div>
+    <div class="form-row">
+      <div><label>Capacité (pers.)</label><input id="apt-cap" type="number" min="1" value="4"></div>
+      <div><label>Prix / nuit (€)</label><input id="apt-prix" type="number" min="0" value="120"></div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:12px">
+      <button class="btn btn-primary" onclick="saveNewApt()">Ajouter</button>
+      <button class="btn btn-ghost" onclick="closeModal('modal-new-apt')">Annuler</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== DATA =====
+var S = {
+  settings: { nom: 'Les Mélèzes', loc: 'Savoie, France' },
+  apts: [
+    {id:'A1',nom:'Chamois',cap:4,prix:130,statut:'occupe'},
+    {id:'A2',nom:'Bouquetin',cap:3,prix:110,statut:'occupe'},
+    {id:'A3',nom:'Marmottes',cap:5,prix:150,statut:'nettoyer'},
+    {id:'A4',nom:'Edelweiss',cap:2,prix:100,statut:'occupe'},
+    {id:'A5',nom:'Génépi',cap:2,prix:95,statut:'libre'},
+    {id:'A6',nom:'Cristal',cap:4,prix:140,statut:'pret'},
+    {id:'A7',nom:'Poudreuse',cap:6,prix:180,statut:'nettoyer'},
+    {id:'A8',nom:'Alpaga',cap:3,prix:120,statut:'occupe'}
+  ],
+  reservations: [
+    {id:1,apt:'A1',client:'M. Bernard',tel:'',email:'',pers:4,arr:'2025-04-10',dep:'2025-04-17',mnt:910,statut:'confirmee',notes:''},
+    {id:2,apt:'A2',client:'Famille Petit',tel:'',email:'',pers:3,arr:'2025-04-12',dep:'2025-04-19',mnt:770,statut:'confirmee',notes:''},
+    {id:3,apt:'A3',client:'Famille Dupont',tel:'',email:'',pers:5,arr:'2025-04-15',dep:'2025-04-22',mnt:1050,statut:'confirmee',notes:'Arrivée tardive'},
+    {id:4,apt:'A4',client:'Couple Morel',tel:'',email:'',pers:2,arr:'2025-04-13',dep:'2025-04-20',mnt:700,statut:'confirmee',notes:''},
+    {id:5,apt:'A5',client:'M. et Mme Leclerc',tel:'',email:'',pers:2,arr:'2025-04-16',dep:'2025-04-23',mnt:665,statut:'confirmee',notes:''},
+    {id:6,apt:'A7',client:'Groupe Martin',tel:'',email:'',pers:6,arr:'2025-04-17',dep:'2025-04-24',mnt:1260,statut:'confirmee',notes:'Groupe entreprise'},
+    {id:7,apt:'A8',client:'Mme Fontaine',tel:'',email:'',pers:3,arr:'2025-04-11',dep:'2025-04-18',mnt:840,statut:'confirmee',notes:''}
+  ],
+  tasks: [
+    {id:1,apt:'A3',desc:'Ménage complet + linge',prio:'haute',done:false},
+    {id:2,apt:'A7',desc:'Ménage complet + linge',prio:'haute',done:false},
+    {id:3,apt:'A6',desc:'Vérification état — prêt',prio:'normale',done:true}
+  ],
+  pdjs: [
+    {id:1,apt:'A1',date:'2025-04-16',buffet:2,spec:'Sans gluten x1'},
+    {id:2,apt:'A2',date:'2025-04-16',buffet:3,spec:''},
+    {id:3,apt:'A3',date:'2025-04-16',buffet:4,spec:'Végétalien x1'},
+    {id:4,apt:'A4',date:'2025-04-16',buffet:2,spec:''},
+    {id:5,apt:'A8',date:'2025-04-16',buffet:1,spec:''}
+  ],
+  mouvements: [
+    {id:1,lib:'Famille Dupont — A3 (7 nuits)',type:'recette',mnt:1050,date:'2025-04-15',apt:'A3'},
+    {id:2,lib:'M. Bernard — A1 (7 nuits)',type:'recette',mnt:910,date:'2025-04-10',apt:'A1'},
+    {id:3,lib:'Produits ménage — Lidl Pro',type:'depense',mnt:124,date:'2025-04-12',apt:''},
+    {id:4,lib:'Famille Petit — A2 (7 nuits)',type:'recette',mnt:770,date:'2025-04-12',apt:'A2'},
+    {id:5,lib:'Linge et blanchisserie',type:'depense',mnt:210,date:'2025-04-13',apt:''},
+    {id:6,lib:'Mme Fontaine — A8 (7 nuits)',type:'recette',mnt:840,date:'2025-04-11',apt:'A8'},
+    {id:7,lib:'Internet + téléphone',type:'depense',mnt:65,date:'2025-04-01',apt:''},
+    {id:8,lib:'Petits-déjeuners fournisseur',type:'depense',mnt:180,date:'2025-04-14',apt:''}
+  ]
+};
+
+function load(){var d=localStorage.getItem('alpigest');if(d)try{S=JSON.parse(d)}catch(e){}}
+function save(){localStorage.setItem('alpigest',JSON.stringify(S))}
+load();
+
+// ===== NAVIGATION =====
+function showPage(id){
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
+  document.getElementById('pg-'+id).classList.add('on');
+  document.querySelectorAll('.nb').forEach(b=>{if(b.textContent.toLowerCase().includes(id)||b.getAttribute('onclick')&&b.getAttribute('onclick').includes("'"+id+"'"))b.classList.add('on')});
+  renders[id]&&renders[id]();
+}
+
+// ===== MODALS =====
+function openModal(id){
+  document.getElementById(id).classList.add('on');
+  if(id==='modal-new-resa')fillAptSelects('nr-apt');
+  if(id==='modal-mvt'){fillAptSelects('mvt-apt',true);document.getElementById('mvt-date').value=today()}
+  if(id==='modal-pdj'){fillAptSelects('pdj-apt');document.getElementById('pdj-date').value=tomorrow()}
+  if(id==='modal-task')fillAptSelects('task-apt');
+}
+function closeModal(id){document.getElementById(id).classList.remove('on')}
+document.querySelectorAll('.modal-overlay').forEach(m=>m.addEventListener('click',function(e){if(e.target===this)this.classList.remove('on')}));
+
+function fillAptSelects(id,withEmpty){
+  var s=document.getElementById(id);s.innerHTML='';
+  if(withEmpty){var o=document.createElement('option');o.value='';o.textContent='—';s.appendChild(o)}
+  S.apts.forEach(a=>{var o=document.createElement('option');o.value=a.id;o.textContent=a.id+' · '+a.nom;s.appendChild(o)});
+}
+
+// ===== UTILS =====
+function today(){return new Date().toISOString().slice(0,10)}
+function tomorrow(){var d=new Date();d.setDate(d.getDate()+1);return d.toISOString().slice(0,10)}
+function fmtDate(s){if(!s)return'';var p=s.split('-');return p[2]+'/'+p[1]+'/'+p[0]}
+function daysBetween(a,b){return Math.round((new Date(b)-new Date(a))/86400000)}
+function getApt(id){return S.apts.find(a=>a.id===id)||{}}
+function nextId(arr){return arr.length?Math.max(...arr.map(x=>x.id))+1:1}
+
+// ===== DASHBOARD =====
+function renderDashboard(){
+  // alerts
+  var az=document.getElementById('alert-zone');az.innerHTML='';
+  var tod=today();
+  var arrivals=S.reservations.filter(r=>r.arr===tod&&r.statut==='confirmee');
+  var departures=S.reservations.filter(r=>r.dep===tod&&r.statut==='confirmee');
+  if(arrivals.length||departures.length){
+    az.innerHTML='<div class="alert-bar">⚠ Aujourd\'hui : '+arrivals.length+' arrivée(s), '+departures.length+' départ(s)</div>';
+  }
+  // kpis
+  var occ=S.apts.filter(a=>a.statut==='occupe').length;
+  var total=S.apts.length;
+  var ca=S.mouvements.filter(m=>m.type==='recette').reduce((s,m)=>s+m.mnt,0);
+  var pdj_tomorrow=S.pdjs.filter(p=>p.date===tomorrow()).reduce((s,p)=>s+p.buffet,0);
+  document.getElementById('kpi-zone').innerHTML=
+    kpiHtml('Taux d\'occupation',Math.round(occ/total*100)+'%',occ+' / '+total+' apparts')+
+    kpiHtml('CA total',ca.toLocaleString('fr-FR')+' €',S.mouvements.filter(m=>m.type==='recette').length+' encaissements')+
+    kpiHtml('Départs aujourd\'hui',departures.length,departures.map(r=>r.apt).join(', ')||'Aucun')+
+    kpiHtml('Petits-déj. demain',pdj_tomorrow,S.pdjs.filter(p=>p.date===tomorrow()).length+' apparts');
+  // apt grid
+  var ag=document.getElementById('apt-grid-dash');ag.innerHTML='';
+  S.apts.forEach(a=>{ag.innerHTML+=aptCard(a)});
+  // today list
+  var tl=document.getElementById('today-list');tl.innerHTML='';
+  var combined=[...arrivals.map(r=>({...r,type:'arr'})),...departures.map(r=>({...r,type:'dep'}))];
+  if(!combined.length){tl.innerHTML='<div style="color:var(--text3);font-size:13px;padding:8px">Aucun mouvement aujourd\'hui</div>'}
+  else combined.forEach(r=>{
+    tl.innerHTML+='<div class="ri"><div class="ra">'+r.apt+' · '+getApt(r.apt).nom+'</div><div><div class="rc">'+r.client+'</div><div class="rd">'+r.pers+' pers.</div></div><span class="badge '+(r.type==='arr'?'bg':'bb')+'">'+(r.type==='arr'?'Arrivée':'Départ')+'</span></div>';
+  });
+  // next resas
+  var nl=document.getElementById('next-resa-list');nl.innerHTML='';
+  var upcoming=S.reservations.filter(r=>r.arr>tod&&r.statut==='confirmee').sort((a,b)=>a.arr.localeCompare(b.arr)).slice(0,5);
+  if(!upcoming.length){nl.innerHTML='<div style="color:var(--text3);font-size:13px;padding:8px">Aucune réservation à venir</div>'}
+  else upcoming.forEach(r=>{
+    var d=daysBetween(tod,r.arr);
+    nl.innerHTML+='<div class="ri"><div class="ra">'+r.apt+' · '+getApt(r.apt).nom+'</div><div class="rc">'+r.client+'</div><div><div class="rd">'+fmtDate(r.arr)+' → '+fmtDate(r.dep)+'</div></div><span class="badge '+(d===0?'ba':d<=2?'bb':'bg')+'">'+(d===0?'Aujourd\'hui':d===1?'Demain':'Dans '+d+'j')+'</span></div>';
+  });
+}
+
+function kpiHtml(lbl,val,sub){return'<div class="kpi"><div class="kl">'+lbl+'</div><div class="kv">'+val+'</div><div class="ks">'+sub+'</div></div>'}
+function aptCard(a){return'<div class="ap '+a.statut+'" onclick="toggleAptStatus(\''+a.id+'\')"><div class="an">'+a.id+'</div><div class="aname">'+a.nom+'</div><div class="as">'+statusLabel(a.statut)+'</div></div>'}
+function statusLabel(s){return{libre:'Libre',occupe:'Occupé',nettoyer:'À nettoyer',pret:'Prêt'}[s]||s}
+
+function toggleAptStatus(id){
+  var a=S.apts.find(x=>x.id===id);if(!a)return;
+  var order=['libre','pret','nettoyer','occupe'];
+  a.statut=order[(order.indexOf(a.statut)+1)%order.length];
+  save();renderDashboard();renderMenage();
+}
+
+// ===== RÉSERVATIONS =====
+var calMonth=new Date().getMonth(),calYear=new Date().getFullYear();
+
+function renderReservations(){
+  var tbody=document.getElementById('resa-tbody');tbody.innerHTML='';
+  var sorted=[...S.reservations].sort((a,b)=>b.arr.localeCompare(a.arr));
+  sorted.forEach(r=>{
+    var statusMap={confirmee:'<span class="badge bg">Confirmée</span>',option:'<span class="badge ba">Option</span>',annulee:'<span class="badge br">Annulée</span>'};
+    tbody.innerHTML+='<tr><td><b style="color:var(--amber)">'+r.apt+'</b> · '+getApt(r.apt).nom+'</td><td>'+r.client+'</td><td>'+fmtDate(r.arr)+'</td><td>'+fmtDate(r.dep)+'</td><td>'+r.pers+'</td><td style="color:var(--green)">'+r.mnt.toLocaleString('fr-FR')+' €</td><td>'+statusMap[r.statut]+'</td><td><button class="btn btn-danger btn-sm" onclick="deleteResa('+r.id+')">✕</button></td></tr>';
+  });
+  renderCal();
+}
+
+function setResaTab(t,btn){
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('resa-tab-liste').style.display=t==='liste'?'block':'none';
+  document.getElementById('resa-tab-calendrier').style.display=t==='calendrier'?'block':'none';
+  if(t==='calendrier')renderCal();
+}
+
+function renderCal(){
+  var monthNames=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+  document.getElementById('cal-month-lbl').textContent=monthNames[calMonth]+' '+calYear;
+  var daysInMonth=new Date(calYear,calMonth+1,0).getDate();
+  var g=document.getElementById('cal-grid');g.innerHTML='';
+  g.style.gridTemplateColumns='80px repeat('+daysInMonth+',1fr)';
+  // header
+  g.innerHTML+='<div class="cal-head"></div>';
+  for(var d=1;d<=daysInMonth;d++)g.innerHTML+='<div class="cal-head">'+d+'</div>';
+  // rows
+  S.apts.forEach(a=>{
+    g.innerHTML+='<div class="cal-apt-lbl">'+a.id+'</div>';
+    for(var d=1;d<=daysInMonth;d++){
+      var dateStr=calYear+'-'+(calMonth+1<10?'0':'')+(calMonth+1)+'-'+(d<10?'0':'')+d;
+      var cls='cal-cell';
+      var resa=S.reservations.find(r=>r.apt===a.id&&r.statut!=='annulee'&&r.arr<=dateStr&&r.dep>dateStr);
+      if(resa){
+        if(resa.arr===dateStr)cls+=' arr';
+        else cls+=' occ';
+      }
+      var dep=S.reservations.find(r=>r.apt===a.id&&r.statut!=='annulee'&&r.dep===dateStr);
+      if(dep)cls='cal-cell dep';
+      g.innerHTML+='<div class="'+cls+'" title="'+a.id+'"></div>';
+    }
+  });
+}
+function calPrev(){calMonth--;if(calMonth<0){calMonth=11;calYear--;}renderCal()}
+function calNext(){calMonth++;if(calMonth>11){calMonth=0;calYear++;}renderCal()}
+
+function saveResa(){
+  var apt=document.getElementById('nr-apt').value;
+  var client=document.getElementById('nr-client').value;
+  var arr=document.getElementById('nr-arr').value;
+  var dep=document.getElementById('nr-dep').value;
+  if(!apt||!client||!arr||!dep){alert('Remplissez les champs obligatoires');return}
+  S.reservations.push({
+    id:nextId(S.reservations),apt,client,
+    tel:document.getElementById('nr-tel').value,
+    email:document.getElementById('nr-email').value,
+    pers:parseInt(document.getElementById('nr-pers').value)||1,
+    arr,dep,
+    mnt:parseFloat(document.getElementById('nr-mnt').value)||0,
+    statut:document.getElementById('nr-statut').value,
+    notes:document.getElementById('nr-notes').value
+  });
+  // update apt status
+  var a=S.apts.find(x=>x.id===apt);
+  if(a&&arr<=today()&&dep>today())a.statut='occupe';
+  save();closeModal('modal-new-resa');renderReservations();
+}
+
+function deleteResa(id){
+  if(!confirm('Supprimer cette réservation ?'))return;
+  S.reservations=S.reservations.filter(r=>r.id!==id);
+  save();renderReservations();
+}
+
+// ===== MÉNAGE =====
+function renderMenage(){
+  var ag=document.getElementById('apt-grid-menage');ag.innerHTML='';
+  S.apts.forEach(a=>{ag.innerHTML+=aptCard(a)});
+  var tl=document.getElementById('tasks-list');tl.innerHTML='';
+  if(!S.tasks.length){tl.innerHTML='<div style="color:var(--text3);font-size:13px;padding:8px">Aucune tâche</div>';return}
+  S.tasks.forEach(t=>{
+    var prioMap={haute:'<span class="badge ba">Priorité haute</span>',normale:'<span class="badge bb">Normale</span>',basse:'<span class="badge bg">Basse</span>'};
+    tl.innerHTML+='<div class="ri" style="'+(t.done?'opacity:.5':'')+'"><div class="ra">'+t.apt+' · '+getApt(t.apt).nom+'</div><div class="rc" style="'+(t.done?'text-decoration:line-through':'')+'">'+t.desc+'</div>'+prioMap[t.prio]+'<button class="btn btn-ghost btn-sm" onclick="toggleTask('+t.id+')">'+(t.done?'↺':'✓')+'</button><button class="btn btn-danger btn-sm" onclick="deleteTask('+t.id+')">✕</button></div>';
+  });
+}
+
+function saveTask(){
+  var apt=document.getElementById('task-apt').value;
+  var desc=document.getElementById('task-desc').value;
+  if(!apt||!desc)return;
+  S.tasks.push({id:nextId(S.tasks),apt,desc,prio:document.getElementById('task-prio').value,done:false});
+  save();closeModal('modal-task');renderMenage();
+}
+function toggleTask(id){var t=S.tasks.find(x=>x.id===id);if(t){t.done=!t.done;save();renderMenage()}}
+function deleteTask(id){S.tasks=S.tasks.filter(t=>t.id!==id);save();renderMenage()}
+
+// ===== PETITS-DÉJEUNERS =====
+function renderPetitdej(){
+  var dateLbl=document.getElementById('pdj-date-lbl');
+  var targetDate=tomorrow();
+  dateLbl.textContent='demain '+fmtDate(targetDate);
+  var list=S.pdjs.filter(p=>p.date===targetDate);
+  var totalCouverts=list.reduce((s,p)=>s+p.buffet,0);
+  var totalSpec=list.filter(p=>p.spec).length;
+  document.getElementById('pdj-kpis').innerHTML=
+    kpiHtml('Total couverts demain',totalCouverts,list.length+' appartements')+
+    kpiHtml('Régimes spéciaux',totalSpec,'commandes particulières')+
+    kpiHtml('Commandes enregistrées',S.pdjs.length,'toutes dates')+
+    kpiHtml('Apparts servis aujourd\'hui',S.pdjs.filter(p=>p.date===today()).length,'');
+  var pl=document.getElementById('pdj-list');pl.innerHTML='';
+  if(!list.length){pl.innerHTML='<div style="color:var(--text3);font-size:13px;padding:8px">Aucune commande pour demain</div>';return}
+  list.forEach(p=>{
+    pl.innerHTML+='<div class="pi"><div class="pa">'+p.apt+' · '+getApt(p.apt).nom+'</div><div class="ptags"><span class="ptag">Buffet x'+p.buffet+'</span>'+(p.spec?'<span class="ptag">'+p.spec+'</span>':'')+'</div><div class="pc">'+p.buffet+'</div></div>';
+  });
+}
+
+function savePdj(){
+  var apt=document.getElementById('pdj-apt').value;
+  var date=document.getElementById('pdj-date').value;
+  if(!apt||!date)return;
+  var existing=S.pdjs.find(p=>p.apt===apt&&p.date===date);
+  if(existing){existing.buffet=parseInt(document.getElementById('pdj-buffet').value)||0;existing.spec=document.getElementById('pdj-spec').value}
+  else S.pdjs.push({id:nextId(S.pdjs),apt,date,buffet:parseInt(document.getElementById('pdj-buffet').value)||0,spec:document.getElementById('pdj-spec').value});
+  save();closeModal('modal-pdj');renderPetitdej();
+}
+
+// ===== COMPTABILITÉ =====
+function renderCompta(){
+  var recettes=S.mouvements.filter(m=>m.type==='recette').reduce((s,m)=>s+m.mnt,0);
+  var depenses=S.mouvements.filter(m=>m.type==='depense').reduce((s,m)=>s+m.mnt,0);
+  var net=recettes-depenses;
+  document.getElementById('compta-kpis').innerHTML=
+    kpiHtml('Total recettes',recettes.toLocaleString('fr-FR')+' €',S.mouvements.filter(m=>m.type==='recette').length+' entrées')+
+    kpiHtml('Total dépenses',depenses.toLocaleString('fr-FR')+' €',S.mouvements.filter(m=>m.type==='depense').length+' sorties')+
+    '<div class="kpi"><div class="kl">Résultat net</div><div class="kv" style="color:'+(net>=0?'var(--green)':'var(--red)')+'">'+net.toLocaleString('fr-FR')+' €</div><div class="ks">'+(net>=0?'Bénéfice':'Déficit')+'</div></div>'+
+    kpiHtml('Nb mouvements',S.mouvements.length,'total enregistrés');
+  // mouvements
+  var ml=document.getElementById('mvt-list');ml.innerHTML='';
+  var sorted=[...S.mouvements].sort((a,b)=>b.date.localeCompare(a.date));
+  sorted.forEach(m=>{
+    ml.innerHTML+='<div class="cr"><span class="cl">'+fmtDate(m.date)+'&nbsp;&nbsp;'+m.lib+'</span><span class="'+(m.type==='recette'?'cp':'cm')+'">'+(m.type==='recette'?'+':'-')+m.mnt.toLocaleString('fr-FR')+' €</span></div>';
+  });
+  // revenus par apt
+  var ra=document.getElementById('rev-by-apt');ra.innerHTML='';
+  var maxRev=Math.max(...S.apts.map(a=>S.mouvements.filter(m=>m.apt===a.id&&m.type==='recette').reduce((s,m)=>s+m.mnt,0)),1);
+  S.apts.forEach(a=>{
+    var rev=S.mouvements.filter(m=>m.apt===a.id&&m.type==='recette').reduce((s,m)=>s+m.mnt,0);
+    ra.innerHTML+='<div class="sbar"><div class="sbar-lbl">'+a.id+' · '+a.nom+'</div><div class="sbar-track"><div class="sbar-fill" style="width:'+Math.round(rev/maxRev*100)+'%"></div></div><div class="sbar-val">'+rev.toLocaleString('fr-FR')+' €</div></div>';
+  });
+}
+
+function saveMvt(){
+  var lib=document.getElementById('mvt-lib').value;
+  var mnt=parseFloat(document.getElementById('mvt-mnt').value);
+  if(!lib||!mnt)return;
+  S.mouvements.push({id:nextId(S.mouvements),lib,type:document.getElementById('mvt-type').value,mnt,date:document.getElementById('mvt-date').value,apt:document.getElementById('mvt-apt').value});
+  save();closeModal('modal-mvt');renderCompta();
+}
+
+// ===== PARAMÈTRES =====
+function renderSettings(){
+  document.getElementById('set-nom').value=S.settings.nom;
+  document.getElementById('set-loc').value=S.settings.loc;
+  var al=document.getElementById('apt-settings-list');al.innerHTML='';
+  S.apts.forEach(a=>{
+    al.innerHTML+='<div class="ri"><div class="ra">'+a.id+'</div><div class="rc">'+a.nom+' · '+a.cap+' pers. · '+a.prix+' €/nuit</div><button class="btn btn-danger btn-sm" onclick="deleteApt(\''+a.id+'\')">✕</button></div>';
+  });
+}
+
+function saveSettings(){
+  S.settings.nom=document.getElementById('set-nom').value||'Résidence';
+  S.settings.loc=document.getElementById('set-loc').value;
+  document.getElementById('res-name-display').textContent='— '+S.settings.nom;
+  save();alert('Paramètres enregistrés ✓');
+}
+
+function saveNewApt(){
+  var num=document.getElementById('apt-num').value.trim();
+  var nom=document.getElementById('apt-nomv').value.trim();
+  if(!num||!nom)return;
+  if(S.apts.find(a=>a.id===num)){alert('Cet identifiant existe déjà');return}
+  S.apts.push({id:num,nom,cap:parseInt(document.getElementById('apt-cap').value)||4,prix:parseFloat(document.getElementById('apt-prix').value)||100,statut:'libre'});
+  save();closeModal('modal-new-apt');renderSettings();
+}
+
+function deleteApt(id){
+  if(!confirm('Supprimer l\'appartement '+id+' ? Les réservations liées seront également supprimées.'))return;
+  S.apts=S.apts.filter(a=>a.id!==id);
+  S.reservations=S.reservations.filter(r=>r.apt!==id);
+  save();renderSettings();
+}
+
+// ===== RENDER MAP =====
+var renders={
+  dashboard:renderDashboard,
+  reservations:renderReservations,
+  menage:renderMenage,
+  petitdej:renderPetitdej,
+  compta:renderCompta,
+  settings:renderSettings
+};
+
+// ===== INIT =====
+document.getElementById('res-name-display').textContent='— '+S.settings.nom;
+renderDashboard();
+</script>
+</body>
+</html>
